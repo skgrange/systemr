@@ -11,5 +11,6 @@ system_info <- function() {
     t(Sys.info()), 
     stringsAsFactors = FALSE
   )
+
   
 }

@@ -3,4 +3,5 @@
 #' @author Stuart K. Grange
 #' 
 #' @export
-detect_os <- function() as.character(.Platform$OS.type)
+os <- function() as.character(.Platform$OS.type)
+
