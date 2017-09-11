@@ -1,11 +1,11 @@
 Package: systemr
 Type: Package
-Title: An R package 
-Version: 0.0.06
-Date: 2017-08-31
+Title: An R package to return structured system calls
+Version: 0.1.5
+Date: 2017-09-11
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"))
-Description: 
+Description: An R package to return structured system calls
 URL: https://github.com
 License: GPL (>= 2)
 ByteCompile: true
@@ -13,9 +13,13 @@ Imports:
     stringr,
     lubridate,
     plyr,
+    dplyr,
     jsonlite,
     testthat,
     hms,
     magrittr,
     methods
+Suggests: 
+    threadr,
+    databaser
 RoxygenNote: 6.0.1

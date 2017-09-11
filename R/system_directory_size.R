@@ -18,6 +18,7 @@ system_directory_size <- function(directory, unit = "kb") {
   
   # Parse
   unit <- stringr::str_to_lower(unit)
+  directory <- shQuote(directory)
   
   df_map <- data.frame(
     directory, 

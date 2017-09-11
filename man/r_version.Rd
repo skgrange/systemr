@@ -2,7 +2,7 @@
 % Please edit documentation in R/r_version.R
 \name{r_version}
 \alias{r_version}
-\title{Function to get R's version information.}
+\title{Function to return a formatred \code{R.Version} call.}
 \usage{
 r_version()
 }
@@ -10,7 +10,7 @@ r_version()
 Data frame.
 }
 \description{
-Function to get R's version information.
+Function to return a formatred \code{R.Version} call.
 }
 \author{
 Stuart K. Grange

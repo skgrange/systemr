@@ -1,4 +1,4 @@
-#' Function to return a formated \code{Sys.info} call. 
+#' Function to return a formatted \code{Sys.info} call. 
 #' 
 #' @author Stuart K. Grange
 #' 

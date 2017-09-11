@@ -2,6 +2,8 @@
 #' 
 #' @author Stuart K. Grange
 #' 
+#' @return Data frame. 
+#' 
 #' @export
 ubuntu_release <- function() {
   

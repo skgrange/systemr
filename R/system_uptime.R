@@ -11,7 +11,7 @@ system_uptime <- function(round = TRUE) {
   date_system <- lubridate::now()
   
   # Get and clean uptime
-  text <- system("cat /proc/uptime", intern = TRUE)
+  text <- readLines("/proc/uptime", warn = FALSE)
   seconds <- stringr::str_split_fixed(text, " ", 2)[, 1]
   seconds <- as.numeric(seconds)
   

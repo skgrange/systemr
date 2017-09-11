@@ -6,6 +6,9 @@
 \usage{
 ubuntu_release()
 }
+\value{
+Data frame.
+}
 \description{
 Function to get Ubuntu release information.
 }

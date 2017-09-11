@@ -1,30 +1,32 @@
-#' Function to get R's version information. 
+#' Function to return a formatred \code{R.Version} call. 
 #' 
 #' @author Stuart K. Grange
 #' 
 #' @return Data frame. 
 #' 
+#' @export
 r_version <- function() {
   
-  # Get information
-  list_version <- R.version
+  # Get version
+  df <- data.frame(t(R.Version()))
   
-  # Get pieces of simple.list
-  variable <- names(list_version)
-  variable <- stringr::str_replace_all(variable, " |\\.", "_")
-  values <- as.character(list_version)
+  # Clean names
+  names(df) <- stringr::str_replace_all(names(df), "\\.", "_")
   
-  # Create empty data frame with correct number of variables
-  df <- data.frame(matrix(NA, nrow = 1, ncol = length(variable)))
+  # Add some formats too
+  df$version_string_short <- stringr::str_c(
+    df$language, 
+    " ", 
+    df$major, 
+    ".", 
+    df$minor
+  )
   
-  # Give names
-  names(df) <- variable
-  
-  # Add values to data frame
-  df[1, ] <- values
-  
-  # Add another variable
-  df[, "version_full"] <- stringr::str_c(df[, "major"], df[, "minor"], sep = ".")
+  df$version_string_nickname <- stringr::str_c(
+    df$version_string_short,
+    " ", 
+    df$nickname
+  )
   
   return(df)
   
