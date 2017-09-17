@@ -1,0 +1,16 @@
+language: r
+sudo: required
+warnings_are_errors: false
+
+env:
+  global:
+    - _R_CHECK_FORCE_SUGGESTS_=FALSE
+
+r_binary_packages:
+  - Rcpp
+
+# Install development packages
+r_github_packages:
+  - skgrange/threadr
+  - skgrange/databaser
+
