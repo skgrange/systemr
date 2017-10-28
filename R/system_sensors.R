@@ -9,7 +9,6 @@ system_sensors <- function() {
   
   # Get system things, not used at the moment
   date_system <- lubridate::now()
-  hostname <- hostname()
   
   # What variables to get? 
   variables <- c(

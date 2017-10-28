@@ -32,7 +32,6 @@ system_mac_addresses <- function(format = FALSE) {
   
   # Build data frame
   df <- data.frame(
-    hostname = hostname(),
     adapter = adapter,
     mac_address = mac_address,
     stringsAsFactors = FALSE

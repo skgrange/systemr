@@ -19,7 +19,6 @@ system_usb_devices <- function() {
   
   # Build data frame
   df <- data.frame(
-    hostname = hostname(),
     bus = as.integer(text_split[, 2]), 
     device = as.integer(text_split[, 4]), 
     id = text_split[, 6], 
