@@ -2,8 +2,10 @@
 
 export("%>%")
 export(hostname)
+export(linux_release)
 export(os)
 export(r_version)
+export(resize_image)
 export(stop_quietly)
 export(synchronize_directory)
 export(system_cpu_information)

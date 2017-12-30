@@ -4,4 +4,3 @@
 #' 
 #' @export
 os <- function() as.character(.Platform$OS.type)
-

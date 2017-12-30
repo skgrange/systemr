@@ -4,12 +4,16 @@
 \alias{synchronize_directory}
 \title{Function to synchronize a local and remote directory with \code{rsync}.}
 \usage{
-synchronize_directory(directory_local, directory_remote, verbose = TRUE)
+synchronize_directory(directory_local, directory_remote,
+  calculate_size = TRUE, dry_run = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{directory_local}{Local directory to synchronize to remote directory.}
 
 \item{directory_remote}{Remote directory to synchronize from local directory.}
+
+\item{calculate_size}{Should the function calculate and include directory 
+size in the return?}
 
 \item{verbose}{Should the function give messages?}
 }

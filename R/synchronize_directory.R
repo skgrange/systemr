@@ -7,6 +7,9 @@
 #' 
 #' @param directory_remote Remote directory to synchronize from local directory.
 #' 
+#' @param calculate_size Should the function calculate and include directory 
+#' size in the return? 
+#' 
 #' @param verbose Should the function give messages? 
 #' 
 #' @author Stuart K. Grange
@@ -15,14 +18,18 @@
 #' 
 #' @export
 synchronize_directory <- function(directory_local, directory_remote, 
+                                  calculate_size = TRUE, dry_run = TRUE, 
                                   verbose = TRUE) {
+  
+  # Always verbose when dry_run
+  if (dry_run) verbose <- TRUE
   
   # Get system date
   date_system_start <- lubridate::now()
   
   # Build rsync command
   command <- stringr::str_c(
-    "rsync -ravh --progress --delete", 
+    "rsync -ravh --progress --delete -dryrun", 
     directory_local,
     directory_remote, 
     sep = " "
@@ -36,14 +43,29 @@ synchronize_directory <- function(directory_local, directory_remote,
     
   }
   
+  # Drop dry run
+  if (!dry_run) command <- stringr::str_replace(command, " -dryrun", "")
+  
   # Clean up command
   command <- str_trim_many_spaces(command)
   
   # Get size to be synchronized
-  size_directory_local <- system_directory_size(directory_local)$size
+  if (calculate_size) {
+   
+    if (verbose) message("Calculating size of directory...")
+    size_directory_local <- system_directory_size(directory_local)$size 
+    
+  } else {
+    
+    size_directory_local <- NA
+    
+  }
   
-  # Do the synchronisation
+  # Do the synchronisation with rsync
   system(command)
+  
+  if (dry_run) 
+    message("`dry_run` selected, no files synchronized or modified...")
   
   # Get system date
   date_system_end <- lubridate::now()
