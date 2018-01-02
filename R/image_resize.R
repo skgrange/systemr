@@ -13,7 +13,7 @@
 #' @return Invisible. 
 #' 
 #' @export
-resize_image <- function(file, quality = 2000, file_output = NA, 
+image_resize <- function(file, quality = 2000, file_output = NA, 
                          verbose = FALSE) {
   
   # Check if image magick is installed
@@ -23,7 +23,7 @@ resize_image <- function(file, quality = 2000, file_output = NA,
   purrr:::walk2(
     .x = file, 
     .y = file_output,
-    .f = resize_image_worker,
+    .f = image_resize_worker,
     quality = quality,
     verbose = verbose
   )
@@ -31,7 +31,7 @@ resize_image <- function(file, quality = 2000, file_output = NA,
 }
 
 
-resize_image_worker <- function(file, file_output, quality, verbose) {
+image_resize_worker <- function(file, file_output, quality, verbose) {
   
   # Ensure path is expanded, not really nessassary here
   file <- path.expand(file)
