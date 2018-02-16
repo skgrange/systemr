@@ -29,4 +29,10 @@ linux_release <- function() {
 
 
 #' @export
-ubuntu_release <- linux_release
+ubuntu_release <- function() {
+  
+  .Deprecated(new = "linux_release")
+  linux_release()
+  
+}
+  

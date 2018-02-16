@@ -43,7 +43,7 @@ system_last_users <- function() {
   names(df) <- c("activity", "location", "date_start", "date_end")
   
   # Parse dates, no tz used here
-  df$date_start <- lubridate::ymd_hms(df$date_start)
+  df$date_start <- lubridate::ymd_hms(df$date_start, quiet = TRUE)
   df$date_end <- lubridate::ymd_hms(df$date_end, quiet = TRUE)
   
   # Transform

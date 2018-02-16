@@ -12,7 +12,7 @@ ubuntu_test <- function() {
   df <- linux_release()
   
   # Test column wise
-  test_vector <- purrr::map_lgl(df, ~grepl("ubuntu", ., ignore.case = TRUE))
+  test_vector <- purrr::map_lgl(df, ~grepl("ubuntu|mint", ., ignore.case = TRUE))
   
   # Return a logical
   if (any(test_vector)) {
