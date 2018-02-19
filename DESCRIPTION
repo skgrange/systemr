@@ -1,7 +1,7 @@
 Package: systemr
 Type: Package
 Title: An R package to return structured system calls
-Version: 0.2.0
+Version: 0.2.1
 Date: 2018-02-16
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"))
