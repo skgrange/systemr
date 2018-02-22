@@ -31,6 +31,28 @@ system_memory_information <- function() {
     stringsAsFactors = FALSE
   )
   
+  # Calculate if missing, for older systems
+  if (!"mem_available" %in% df$variable) {
+    
+    # Calculate, not exactly the same as other measures
+    memory_available <- df %>% 
+      filter(variable %in% c("mem_free", "buffers", "cached")) %>% 
+      summarise(value = sum(value)) %>%
+      pull()
+    
+    # Build data frame
+    df_extra <- data.frame(
+      variable = "mem_available",
+      value = memory_available,
+      unit = df$unit[1],
+      stringsAsFactors = FALSE
+    )
+    
+    # Bind
+    df <- bind_rows(df, df_extra)
+
+  }
+  
   return(df)
   
 }

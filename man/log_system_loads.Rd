@@ -4,10 +4,12 @@
 \alias{log_system_loads}
 \title{Function to log system logs.}
 \usage{
-log_system_loads(directory = NA)
+log_system_loads(directory = NA, json = FALSE)
 }
 \arguments{
 \item{directory}{Directory to export data files too.}
+
+\item{json}{Should the output file be a JSON new lines file?}
 }
 \value{
 Invisible, data files.

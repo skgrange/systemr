@@ -5,16 +5,16 @@
 #' 
 #' @param directory Directory to export data files too. 
 #' 
+#' @param json Should the output file be a JSON new lines file? 
+#' 
 #' @author Stuart K. Grange
 #' 
 #' @return Invisible, data files. 
 #' 
 #' @importFrom lubridate now floor_date second minute
 #' 
-#' @importFrom readr write_csv
-#' 
 #' @export
-log_system_loads <- function(directory = NA) {
+log_system_loads <- function(directory = NA, json = FALSE) {
   
   # Catch
   if (is.na(directory)) directory <- getwd()
@@ -87,20 +87,32 @@ log_system_loads <- function(directory = NA) {
       # To data frame
       df <- data.frame(t(vector_results), stringsAsFactors = FALSE)
       
-      # Build file name
-      day <- stringr::str_split_fixed(date_string, " ", 2)[, 1]
-      file_name <- stringr::str_c(day, "_", system, "_system_loads.csv")
-      file_name <- file.path(directory, file_name)
-      
-      # Write to file
-      if (file.exists(file_name)) {
+      if (json) {
         
-        write_csv(df, file_name, append = TRUE)
+        file_name <- stringr::str_c(system, "_system_loads.jsonl")
+        file_name <- file.path(directory, file_name)
+        
+        # Write
+        threadr::write_json_lines(df, file_name, append = TRUE)
         
       } else {
         
-        message("Creating file...")
-        write_csv(df, file_name, append = FALSE)
+        # Build file name
+        day <- stringr::str_split_fixed(date_string, " ", 2)[, 1]
+        file_name <- stringr::str_c(day, "_", system, "_system_loads.csv")
+        file_name <- file.path(directory, file_name)
+        
+        # Write to file
+        if (file.exists(file_name)) {
+          
+          readr::write_csv(df, file_name, append = TRUE)
+          
+        } else {
+          
+          message("Creating file...")
+          readr::write_csv(df, file_name, append = FALSE)
+          
+        }
         
       }
       
