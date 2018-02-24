@@ -23,7 +23,7 @@ log_system_loads <- function(directory = NA, json = FALSE) {
   stopifnot(file.exists("/proc/loadavg"))
   
   # Set options for programme
-  options(digits.secs = 1, digits = 15)
+  options(digits.secs = 2, digits = 15)
   
   # Get system
   system <- hostname()
@@ -86,6 +86,9 @@ log_system_loads <- function(directory = NA, json = FALSE) {
       
       # To data frame
       df <- data.frame(t(vector_results), stringsAsFactors = FALSE)
+      
+      # Correct data types
+      df[] <- lapply(df, type.convert, as.is = TRUE)
       
       if (json) {
         
