@@ -29,13 +29,14 @@ log_system_loads <- function(directory = NA, json = FALSE) {
   system <- hostname()
   
   # Get number of cores
-  cores <- parallel::detectCores()
+  cores <- system_cpu_core_count()
   
   # Number of seconds
   frequency <- 5
   aggregation_trigger <- 60 / frequency
   
-  # Allocate for measurement loop
+  # Allocate for measurement loop, to-do, allocate length too
+  # but this requires a logic rewrite
   list_results <- list()
   
   # Begin measurement loop
@@ -74,7 +75,7 @@ log_system_loads <- function(directory = NA, json = FALSE) {
       
       # Aggregate, mean
       vector_results <- apply(matrix_results[, -1:-2], 2, mean)
-      vector_results <- round(vector_results, 1)
+      vector_results <- round(vector_results, 2)
       
       # Add extras
       vector_results <- c(system, date_system_first, date_string, vector_results)
@@ -211,3 +212,4 @@ sleep_until_next_minute <- function(verbose = TRUE) {
   Sys.sleep(seconds_to_wait)
   
 }
+
