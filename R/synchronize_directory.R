@@ -52,7 +52,9 @@ synchronize_directory <- function(directory_local, directory_remote,
   # Get size to be synchronized
   if (calculate_size) {
    
-    if (verbose) message("Calculating size of directory...")
+    if (verbose) 
+      message(threadr::str_date_formatted(), ": Calculating size of directory...")
+    
     size_directory_local <- system_directory_size(directory_local)$size 
     
   } else {
@@ -65,7 +67,7 @@ synchronize_directory <- function(directory_local, directory_remote,
   system(command)
   
   if (dry_run) 
-    message("`dry_run` selected, no files synchronized or modified...")
+    message(threadr::str_date_formatted(), ": `dry_run` selected, no files synchronized or modified...")
   
   # Get system date
   date_system_end <- lubridate::now()
