@@ -17,35 +17,52 @@ system_sensors <- function() {
   )
   
   # System call
-  text <- system("sensors", intern = TRUE)
+  text <- tryCatch({
+    
+    system("sensors", intern = TRUE, ignore.stderr = TRUE)
+    
+  }, error = function(e) {
+    
+    character()
+    
+  })
   
   # acpitz-virtual-0 is the temperature sensor near/on your CPU socket. This sensor can be unreliable.
   # coretemp-isa-0000 measures the temperature of the specific cores.
   # dell_smm-virtual-0 is your CPU fan, managed by your system firmware.
   
-  # Clean board infomation 
-  index <- tail(grep("Adapter", text), 1)
-  cpu_text <- text[(index + 1):length(text)]
-  
-  value_cpu <- sapply(c("Processor", "Video", "CPU"), function(x) 
-    format_value(cpu_text, x), USE.NAMES = FALSE)
-  
-  names(value_cpu) <- c("cpu_fan_rpm", "video_fan_rpm", "cpu_temperature")
-  
-  df_cpu <- data.frame(
-    t(value_cpu), 
-    stringsAsFactors = FALSE
-  )
-  
-  # Get core temperatures too
-  text_cores <- threadr::str_filter(text, "Core ")
-  value_cores <- str_extract_the_value(text_cores)
-  
-  # Build sensors
-  list_sensors <- list(
-    board = df_cpu, 
-    cpu_core_temperatures = value_cores
-  )
+  if (length(text) != 0) {
+    
+    # Clean board infomation 
+    index <- tail(grep("Adapter", text), 1)
+    cpu_text <- text[(index + 1):length(text)]
+    
+    value_cpu <- sapply(c("Processor", "Video", "CPU"), function(x) 
+      format_value(cpu_text, x), USE.NAMES = FALSE)
+    
+    names(value_cpu) <- c("cpu_fan_rpm", "video_fan_rpm", "cpu_temperature")
+    
+    df_cpu <- data.frame(
+      t(value_cpu), 
+      stringsAsFactors = FALSE
+    )
+    
+    # Get core temperatures too
+    text_cores <- threadr::str_filter(text, "Core ")
+    value_cores <- str_extract_the_value(text_cores)
+    
+    # Build sensors
+    list_sensors <- list(
+      board = df_cpu, 
+      cpu_core_temperatures = value_cores
+    )
+    
+  } else {
+    
+    # Just an empty list
+    list_sensors <- list()
+    
+  }
   
   return(list_sensors)
   
