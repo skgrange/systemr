@@ -1,5 +1,7 @@
 #' Function to list or count users who have running processes. 
 #' 
+#' @param count Should the return be an integer count of processes? 
+#' 
 #' @author Stuart K. Grange
 #' 
 #' @return Character or integer vector. 

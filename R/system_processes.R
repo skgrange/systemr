@@ -1,5 +1,8 @@
 #' Function to list a system's processes. 
 #' 
+#' @param by What variable should be used to arrange/sort the returned data 
+#' frame? 
+#' 
 #' @author Stuart K. Grange 
 #' 
 #' @return Data frame. 

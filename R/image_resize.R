@@ -20,7 +20,7 @@ image_resize <- function(file, quality = 2000, file_output = NA,
   check_install <- image_magick_install()
   
   # Vectorise over file
-  purrr:::walk2(
+  purrr::walk2(
     .x = file, 
     .y = file_output,
     .f = image_resize_worker,

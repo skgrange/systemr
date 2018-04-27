@@ -6,6 +6,9 @@
 \usage{
 system_users_running_processes(count = FALSE)
 }
+\arguments{
+\item{count}{Should the return be an integer count of processes?}
+}
 \value{
 Character or integer vector.
 }

@@ -15,6 +15,9 @@ synchronize_directory(directory_local, directory_remote,
 \item{calculate_size}{Should the function calculate and include directory 
 size in the return?}
 
+\item{dry_run}{Should \code{rsync} be run in dry run mode to simulate, but 
+not conduct the file synchronization. Good for testing.}
+
 \item{verbose}{Should the function give messages?}
 }
 \value{

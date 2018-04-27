@@ -14,6 +14,9 @@ linux_release <- function() {
   text <- grep("^LSB", text, invert = TRUE, value = TRUE)
   text_split <- stringr::str_split_fixed(text, ":\t", 2)
   
+  # Catch NA
+  text_split[, 2] <- ifelse(text_split[, 2] == "n/a", NA, text_split[, 2])
+  
   # Create empty data frame with correct number of variables
   df <- data.frame(matrix(NA, nrow = 1, ncol = length(text_split[, 1])))
   
@@ -26,13 +29,3 @@ linux_release <- function() {
   return(df)
   
 }
-
-
-#' @export
-ubuntu_release <- function() {
-  
-  .Deprecated(new = "linux_release")
-  linux_release()
-  
-}
-  

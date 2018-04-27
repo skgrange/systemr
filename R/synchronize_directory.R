@@ -10,6 +10,9 @@
 #' @param calculate_size Should the function calculate and include directory 
 #' size in the return? 
 #' 
+#' @param dry_run Should \code{rsync} be run in dry run mode to simulate, but 
+#' not conduct the file synchronization. Good for testing. 
+#' 
 #' @param verbose Should the function give messages? 
 #' 
 #' @author Stuart K. Grange

@@ -6,6 +6,10 @@
 \usage{
 system_processes(by = "cpu")
 }
+\arguments{
+\item{by}{What variable should be used to arrange/sort the returned data 
+frame?}
+}
 \value{
 Data frame.
 }
