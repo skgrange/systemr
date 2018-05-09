@@ -1,8 +1,8 @@
 Package: systemr
 Type: Package
-Title: Tools To Return Structured System Calls
-Version: 0.4.0
-Date: 2018-04-27
+Title: Tools to Return Structured System Calls
+Version: 0.4.1
+Date: 2018-05-09
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"))
 Description: A collection of tools to get and return structured system calls 
@@ -30,3 +30,4 @@ Suggests:
     databaser
 Encoding: UTF-8
 RoxygenNote: 6.0.1
+
