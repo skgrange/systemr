@@ -81,3 +81,13 @@ system_memory_usage <- function() {
   return(x)
   
 }
+
+
+#' Function to calculate percentage memory usage. 
+#' 
+#' @author Stuart K. Grange.
+#' 
+#' @return Numeric vector with length of one. 
+#' 
+#' @export
+free <- system_memory_usage
