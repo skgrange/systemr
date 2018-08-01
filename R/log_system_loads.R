@@ -66,23 +66,28 @@ log_system_loads <- function(directory = NA, json = FALSE) {
       # Bind objects within list
       matrix_results <- do.call("rbind", list_results)
       
-      # Get dates
+      # Get date
       date_system_first <- matrix_results[1, 1]
+      
+      # Uptime, use first value too
+      uptime <- matrix_results[1, 3]
       
       # Make well formated human readable dates
       date <- as.POSIXct(date_system_first, tz = "UTC", origin = "1970-01-01")
       date_string <- format.POSIXct(date, format = "%Y-%m-%d %H:%M:%OS", usetz = TRUE)
       
       # Aggregate, mean
-      vector_results <- apply(matrix_results[, -1:-2], 2, mean)
+      vector_results <- apply(matrix_results[, -1:-3], 2, mean)
       vector_results <- round(vector_results, 2)
       
       # Add extras
-      vector_results <- c(system, date_system_first, date_string, vector_results)
+      vector_results <- c(
+        system, date_system_first, date_string, uptime, vector_results
+      )
       
       # Give names
       names(vector_results) <- c(
-        "system", "date_unix", "date", "cpu_load", "memory_load"
+        "system", "date_unix", "date", "uptime", "cpu_load", "memory_load"
       )
       
       # To data frame
@@ -143,15 +148,19 @@ log_system_loads <- function(directory = NA, json = FALSE) {
 
 get_system_loads <- function(date, cores) {
   
+  # Get uptime
+  uptime <- system_uptime(as.vector = TRUE)
+  
   # Get system load
-  x <- readLines("/proc/loadavg")
-  x <- stringr::str_split(x, " ")[[1]][1]
-  x <- as.numeric(x) / cores * 100
+  load <- readLines("/proc/loadavg")
+  load <- stringr::str_split(load, " ")[[1]][1]
+  load <- as.numeric(load) / cores * 100
   
   # Get memory usage
-  y <- system_memory_usage()
+  memory <- system_memory_usage()
   
-  matrix <- matrix(c(date, NA, x, y), nrow = 1, ncol = 4)
+  # Build numeric matrix
+  matrix <- matrix(c(date, NA, uptime, load, memory), nrow = 1, ncol = 5)
   
   return(matrix)
   
@@ -186,7 +195,7 @@ sleep_until_next_clean_time <- function(seconds) {
 sleep_until_next_minute <- function(verbose = TRUE) {
   
   # Get date
-  date <- Sys.time()
+  date <- now()
   
   # Floor round
   date_floor <- floor_date(date, "minute")
@@ -199,11 +208,9 @@ sleep_until_next_minute <- function(verbose = TRUE) {
   if (verbose) {
     
     message(
-      stringr::str_c(
-        "Waiting ", 
-        round(seconds_to_wait), 
-        " seconds until beginning of next minute..."
-      )
+      "Waiting ", 
+      round(seconds_to_wait), 
+      " seconds until beginning of next minute..."
     )
     
   }
@@ -212,4 +219,3 @@ sleep_until_next_minute <- function(verbose = TRUE) {
   Sys.sleep(seconds_to_wait)
   
 }
-

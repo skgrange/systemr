@@ -2,10 +2,25 @@
 #' 
 #' @param round Should the dates and times be rounded to the nearest second? 
 #' 
+#' @param as.vector Should the return be a single numeric value indicating 
+#' seconds since boot time? This is the most efficient way to get this value and 
+#' is suitable for multiple/continuous calling in a logging application.  
+#' 
 #' @author Stuart K. Grange
 #' 
 #' @export
-system_uptime <- function(round = TRUE) {
+system_uptime <- function(round = TRUE, as.vector = FALSE) {
+  
+  # Simple and efficient return
+  if (as.vector) {
+    
+    text <- readLines("/proc/uptime", warn = FALSE)
+    seconds <- stringr::str_split_fixed(text, " ", 2)[, 1]
+    seconds <- as.numeric(seconds)
+    if (round) seconds <- round(seconds)
+    return(seconds)
+    
+  } 
   
   # Get time system has been up
   date_system <- lubridate::now()

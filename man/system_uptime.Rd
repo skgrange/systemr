@@ -4,10 +4,14 @@
 \alias{system_uptime}
 \title{Function to get system uptime.}
 \usage{
-system_uptime(round = TRUE)
+system_uptime(round = TRUE, as.vector = FALSE)
 }
 \arguments{
 \item{round}{Should the dates and times be rounded to the nearest second?}
+
+\item{as.vector}{Should the return be a single numeric value indicating 
+seconds since boot time? This is the most efficient way to get this value and 
+is suitable for multiple/continuous calling in a logging application.}
 }
 \description{
 Function to get system uptime.
