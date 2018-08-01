@@ -16,8 +16,8 @@ system_time_zone <- function() {
     
   }, error = function(e) {
     
-    # Get information
-    x <- system("grep TIMEZONE /etc/sysconfig/clock", intern = TRUE)
+    # Get information, watch escape of \
+    x <- system("grep 'TIMEZONE\\|ZONE' /etc/sysconfig/clock", intern = TRUE)
     
     # Drop default if exists
     x <- grep("DEFAULT", x, invert = TRUE, value = TRUE)
@@ -25,6 +25,7 @@ system_time_zone <- function() {
     # Clean
     x <- stringr::str_replace_all(x, '"', "")
     x <- stringr::str_split_fixed(x, "=", 2)[, 2]
+    
     return(x)
     
   })
