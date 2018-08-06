@@ -4,15 +4,19 @@
 \alias{system_notify}
 \title{Function to send a system notification to the Ubuntu desktop.}
 \usage{
-system_notify(title = "R", message = "")
+system_notify(urgency = "critical", title = "R: ", message = "")
 }
 \arguments{
+\item{urgency}{Urgency of message, one of \code{"low"}, \code{"normal"}, or
+\code{"critical"}. Default is \code{"critical"} because it is the most 
+supported notification type.}
+
 \item{title}{Title for notification.}
 
 \item{message}{Message for notification.}
 }
 \value{
-Invisible.
+Invisible, a desktop notification.
 }
 \description{
 Function to send a system notification to the Ubuntu desktop.
