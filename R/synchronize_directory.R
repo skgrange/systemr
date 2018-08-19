@@ -1,7 +1,7 @@
 #' Function to synchronize a local and remote directory with \code{rsync}. 
 #' 
-#' \code{synchronize_directory} will delete files in the remote directory if not 
-#' present in the local directory. 
+#' \strong{Note}, \code{synchronize_directory} will delete files in the remote 
+#' directory if not present in the local directory by default. 
 #' 
 #' @param directory_local Local directory to synchronize to remote directory. 
 #' 
@@ -13,6 +13,10 @@
 #' @param dry_run Should \code{rsync} be run in dry run mode to simulate, but 
 #' not conduct the file synchronization. Good for testing. 
 #' 
+#' @param delete Should files be deleted? \code{synchronize_directory} will 
+#' delete files in the remote directory if not present in the local directory by
+#' default. 
+#' 
 #' @param verbose Should the function give messages? 
 #' 
 #' @author Stuart K. Grange
@@ -22,7 +26,7 @@
 #' @export
 synchronize_directory <- function(directory_local, directory_remote, 
                                   calculate_size = TRUE, dry_run = TRUE, 
-                                  verbose = TRUE) {
+                                  delete = TRUE, verbose = TRUE) {
   
   # Always verbose when dry_run
   if (dry_run) verbose <- TRUE
@@ -42,15 +46,18 @@ synchronize_directory <- function(directory_local, directory_remote,
   if (!verbose) {
     
     command <- stringr::str_replace(command, "-ravh", "-rah")
-    command <- stringr::str_replace(command, "--progress", "")
+    command <- stringr::str_remove(command, "--progress")
     
   }
   
   # Drop dry run
-  if (!dry_run) command <- stringr::str_replace(command, " -dryrun", "")
+  if (!dry_run) command <- stringr::str_remove(command, " -dryrun")
+  
+  # Drop delete
+  if (!delete) command <- stringr::str_remove(command, " --delete")
   
   # Clean up command
-  command <- str_trim_many_spaces(command)
+  command <- stringr::str_squish(command)
   
   # Get size to be synchronized
   if (calculate_size) {
@@ -69,8 +76,14 @@ synchronize_directory <- function(directory_local, directory_remote,
   # Do the synchronisation with rsync
   system(command)
   
-  if (dry_run) 
-    message(threadr::str_date_formatted(), ": `dry_run` selected, no files synchronized or modified...")
+  if (dry_run) {
+    
+    message(
+      threadr::str_date_formatted(), 
+      ": `dry_run` selected, no files synchronized or modified..."
+    )
+    
+  }
   
   # Get system date
   date_system_end <- lubridate::now()
@@ -110,6 +123,3 @@ str_hms <- function (x, round = NA) {
   x <- ifelse(x == "NA", NA, x)
   return(x)
 }
-
-
-str_trim_many_spaces <- function(x) stringr::str_replace_all(x, "\\s+", " ")

@@ -13,7 +13,7 @@ system_mac_addresses <- function(format = FALSE) {
   # Get and clean system call
   text <- system("ifconfig", intern = TRUE)
   text_filter <- threadr::str_filter(text, "HWaddr")
-  text_filter <- threadr::str_trim_many_spaces(text_filter)
+  text_filter <- stringr::str_squish(text_filter)
   text_filter <- stringr::str_trim(text_filter)
   
   # Split into variables
