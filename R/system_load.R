@@ -2,7 +2,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame. 
+#' @return Tibble. 
 #' 
 #' @export
 system_load <- function() {
@@ -19,11 +19,10 @@ system_load <- function() {
   loads_percent <-  (text_split / cores) * 100
   
   # Build data frame
-  df <- data.frame(
+  df <- data_frame(
     period = c("one_minute", "five_minute", "fifteen_minute"),
     load = text_split,
-    load_percent = loads_percent,
-    stringsAsFactors = FALSE
+    load_percent = loads_percent
   )
   
   return(df)

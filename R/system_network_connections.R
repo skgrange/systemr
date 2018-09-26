@@ -2,7 +2,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame. 
+#' @return Tibble. 
 #' 
 #' @export
 system_network_connections <- function() {
@@ -31,12 +31,11 @@ system_network_connections <- function() {
   device <- ifelse(device == "--", NA, device)
   
   # Build data frame
-  df <- data.frame(
+  df <- data_frame(
     name,
     uuid,
     type,
-    device,
-    stringsAsFactors = FALSE
+    device
   )
   
   return(df)

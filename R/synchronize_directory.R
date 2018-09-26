@@ -21,7 +21,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame with programme timing information.  
+#' @return Tibble with programme timing information.  
 #' 
 #' @export
 synchronize_directory <- function(directory_local, directory_remote, 
@@ -89,12 +89,11 @@ synchronize_directory <- function(directory_local, directory_remote,
   date_system_end <- lubridate::now()
   
   # Build data frame for return
-  df <- data.frame(
+  df <- data_frame(
     system = hostname(),
     task = "synchronize_directory",
     date_start = as.numeric(date_system_start),
-    date_end = as.numeric(date_system_end),
-    stringsAsFactors = FALSE
+    date_end = as.numeric(date_system_end)
   )
   
   # Add the extras

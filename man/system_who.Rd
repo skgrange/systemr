@@ -7,7 +7,7 @@
 system_who()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to return logged in users.

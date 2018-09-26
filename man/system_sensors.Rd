@@ -8,6 +8,8 @@ system_sensors()
 }
 \value{
 Data frame.
+
+Named list.
 }
 \description{
 Function to format \code{sensors} output.

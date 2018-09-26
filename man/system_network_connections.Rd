@@ -7,7 +7,7 @@
 system_network_connections()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to list a system's network connections.

@@ -2,7 +2,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame.
+#' @return Tibble. 
 #' 
 #' @export
 system_disk_space <- function() {
@@ -27,14 +27,13 @@ system_disk_space <- function() {
   mount <- stringr::str_sub(text_no_header, start = index_mount)
   
   # Build data frame
-  df <- data.frame(
+  df <- data_frame(
     file_system, 
     size_total = size,
     size_used = used,
     size_available = available,
     in_use,
-    mount,
-    stringsAsFactors = FALSE
+    mount
   )
   
   # Clean and check data types

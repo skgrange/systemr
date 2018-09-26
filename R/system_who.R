@@ -2,7 +2,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame. 
+#' @return Tibble. 
 #' 
 #' @export
 system_who <- function() {
@@ -23,12 +23,11 @@ system_who <- function() {
   comment <- purrr::map_chr(list_text, 5)
   
   # Build data frame
-  df <- data.frame(
+  df <- data_frame(
     name, 
     line,
     time, 
-    comment,
-    stringsAsFactors = FALSE
+    comment
   )
   
   return(df)

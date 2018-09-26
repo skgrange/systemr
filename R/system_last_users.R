@@ -2,7 +2,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame. 
+#' @return Tibble. 
 #' 
 #' @export
 system_last_users <- function() {
@@ -53,6 +53,9 @@ system_last_users <- function() {
   
   # Arrange
   df <- dplyr::arrange(df, date_start)
+  
+  # To tibble
+  df <- as_tibble(df)
   
   return(df)
   

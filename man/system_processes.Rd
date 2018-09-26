@@ -11,7 +11,7 @@ system_processes(by = "cpu")
 frame?}
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to list a system's processes.

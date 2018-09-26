@@ -7,7 +7,7 @@
 r_version()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to return a formatred \code{R.Version} call.

@@ -8,7 +8,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame. 
+#' @return Tibble. 
 #' 
 #' @export
 system_directory_size <- function(directory, unit = "kb") {
@@ -18,47 +18,37 @@ system_directory_size <- function(directory, unit = "kb") {
   
   # Parse
   unit <- stringr::str_to_lower(unit)
-  
   directory <- path.expand(directory)
   directory <- shQuote(directory)
   
-  df_map <- data.frame(
-    directory, 
-    unit, 
-    stringsAsFactors = FALSE
-  )
+  # Create mapping data frame
+  df_map <- data_frame(directory, unit)
   
-  # Do, rowwise
-  df <- plyr::adply(
-    df_map, 
-    .margins = 1,
-    system_directory_size_worker,
-    .progress = "none"
-  )
+  # Do
+  df <- purrr::map2_dfr(directory, unit, system_directory_size_worker)
   
   return(df)
   
 }
 
 
-system_directory_size_worker <- function(df_map, unit = "kb") {
+system_directory_size_worker <- function(directory, unit) {
   
   # System command work
-  command <- stringr::str_c("du -sk ", df_map$directory)
+  command <- stringr::str_c("du -sk ", directory)
   text <- system(command, intern = TRUE)
   x <- stringr::str_split_fixed(text, "\t", 2)[, 1]
   x <- as.numeric(x)
   
   # Convert units, du returns value in kb
-  if (df_map$unit == "mb") x <- x / 1e+03
-  if (df_map$unit == "gb") x <- x / 1e+06
+  if (unit == "mb") x <- x / 1e+03
+  if (unit == "gb") x <- x / 1e+06
   
   # Build data frame to return
-  df <- data.frame(
-    directory = df_map$directory, 
+  df <- data_frame(
+    directory = directory, 
     size = x,
-    unit = stringr::str_to_upper(df_map$unit),
-    stringsAsFactors = FALSE
+    unit = stringr::str_to_upper(unit)
   )
   
   return(df)

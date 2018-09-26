@@ -7,7 +7,7 @@
 system_load()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to get system loads.

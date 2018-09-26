@@ -2,7 +2,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame. 
+#' @return Tibble. 
 #' 
 #' @export
 r_version <- function() {
@@ -27,6 +27,9 @@ r_version <- function() {
     " ", 
     df$nickname
   )
+  
+  # To tibble
+  df <- as_tibble(df)
   
   return(df)
   

@@ -7,7 +7,7 @@
 linux_release()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to get Linux release information.

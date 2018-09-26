@@ -4,6 +4,8 @@
 #' 
 #' @author Stuart K. Grange
 #' 
+#' @return Named list. 
+#' 
 #' @export
 system_sensors <- function() {
   
@@ -45,7 +47,8 @@ system_sensors <- function() {
     df_cpu <- data.frame(
       t(value_cpu), 
       stringsAsFactors = FALSE
-    )
+    ) %>% 
+      as_tibble()
     
     # Get core temperatures too
     text_cores <- threadr::str_filter(text, "Core ")

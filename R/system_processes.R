@@ -5,7 +5,7 @@
 #' 
 #' @author Stuart K. Grange 
 #' 
-#' @return Data frame. 
+#' @return Tibble. 
 #' 
 #' @export
 system_processes <- function(by = "cpu") {
@@ -41,13 +41,12 @@ system_processes <- function(by = "cpu") {
   command <- stringr::str_trim(command)
   
   # Build data frame
-  df <- data.frame(
+  df <- data_frame(
     user,
     pid, 
     cpu,
     memory,
-    command,
-    stringsAsFactors = FALSE
+    command
   )
   
   # Sort the data fame

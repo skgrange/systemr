@@ -2,15 +2,15 @@
 % Please edit documentation in R/system_info.R
 \name{system_info}
 \alias{system_info}
-\title{Function to return a formatted \code{Sys.info} call.}
+\title{Function to return a better formatted \code{Sys.info} call.}
 \usage{
 system_info()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
-Function to return a formatted \code{Sys.info} call.
+Function to return a better formatted \code{Sys.info} call.
 }
 \author{
 Stuart K. Grange

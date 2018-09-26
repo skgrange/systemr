@@ -12,7 +12,7 @@ system_directory_size(directory, unit = "kb")
 \item{unit}{Vector of units. Can be \code{"kb"}, \code{"mb"}, or \code{"gb"}.}
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 \code{system_directory_size} uses the \code{du} system programme.

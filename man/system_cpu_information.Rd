@@ -7,7 +7,7 @@
 system_cpu_information()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to return CPU information.

@@ -5,7 +5,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame.
+#' @return Tibble.
 #' 
 #' @export
 system_mac_addresses <- function(format = FALSE) {
@@ -15,6 +15,7 @@ system_mac_addresses <- function(format = FALSE) {
   text_filter <- threadr::str_filter(text, "HWaddr")
   text_filter <- stringr::str_squish(text_filter)
   text_filter <- stringr::str_trim(text_filter)
+  # text_filter <- stringr::str_remove(text_filter, "ether ")
   
   # Split into variables
   list_text_filter <- stringr::str_split(text_filter, " ")
@@ -31,10 +32,9 @@ system_mac_addresses <- function(format = FALSE) {
   }
   
   # Build data frame
-  df <- data.frame(
+  df <- data_frame(
     adapter = adapter,
-    mac_address = mac_address,
-    stringsAsFactors = FALSE
+    mac_address = mac_address
   )
   
   return(df)

@@ -15,16 +15,8 @@ ubuntu_test <- function() {
   test_vector <- purrr::map_lgl(df, ~grepl("ubuntu|mint", ., ignore.case = TRUE))
   
   # Return a logical
-  if (any(test_vector)) {
-    
-    x <- TRUE
-    
-  } else {
-    
-    x <- FALSE
-    
-  }
-  
+  x <- ifelse(any(test_vector), TRUE, FALSE)
+
   return(x)
   
 }

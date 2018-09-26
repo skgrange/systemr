@@ -26,7 +26,7 @@ default.}
 \item{verbose}{Should the function give messages?}
 }
 \value{
-Data frame with programme timing information.
+Tibble with programme timing information.
 }
 \description{
 \strong{Note}, \code{synchronize_directory} will delete files in the remote 

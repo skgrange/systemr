@@ -2,7 +2,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame. 
+#' @return Tibble.
 #' 
 #' @export
 linux_release <- function() {
@@ -25,6 +25,9 @@ linux_release <- function() {
   
   # Add values to data frame
   df[1, ] <- text_split[, 2]
+  
+  # To tibble
+  df <- as_tibble(df)
   
   return(df)
   

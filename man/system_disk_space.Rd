@@ -7,7 +7,7 @@
 system_disk_space()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to return a system's file systems' free space information.

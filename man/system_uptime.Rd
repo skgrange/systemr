@@ -13,6 +13,9 @@ system_uptime(round = TRUE, as.vector = FALSE)
 seconds since boot time? This is the most efficient way to get this value and 
 is suitable for multiple/continuous calling in a logging application.}
 }
+\value{
+Tibble.
+}
 \description{
 Function to get system uptime.
 }

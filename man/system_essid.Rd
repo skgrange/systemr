@@ -8,7 +8,7 @@ names.}
 system_essid()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to return a system's extended service set identification (ESSID) 

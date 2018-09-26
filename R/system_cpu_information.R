@@ -2,7 +2,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame. 
+#' @return Tibble.
 #' 
 #' @export
 system_cpu_information <- function() {
@@ -42,7 +42,10 @@ system_cpu_information <- function() {
   
   # Type convert
   df[] <- lapply(df, function(x) type.convert(x, as.is = TRUE))
-
+  
+  # To tibble
+  df <- as_tibble(df)
+  
   return(df)
   
 }

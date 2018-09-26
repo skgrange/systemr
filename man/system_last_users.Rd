@@ -7,7 +7,7 @@
 system_last_users()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to return a formatted version of the Unix \code{last} command.

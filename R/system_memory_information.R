@@ -2,7 +2,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame.
+#' @return Tibble. 
 #' 
 #' @export
 system_memory_information <- function() {
@@ -41,11 +41,10 @@ system_memory_information <- function() {
       pull()
     
     # Build data frame
-    df_extra <- data.frame(
+    df_extra <- data_frame(
       variable = "mem_available",
       value = memory_available,
-      unit = df$unit[1],
-      stringsAsFactors = FALSE
+      unit = df$unit[1]
     )
     
     # Bind

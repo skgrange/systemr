@@ -11,7 +11,7 @@ system_mac_addresses(format = FALSE)
 contain hyphens as the separator?}
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to return a system's media access control (MAC) addresses.

@@ -3,7 +3,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame.
+#' @return Tibble. 
 #' 
 #' @export
 system_essid <- function() {
@@ -17,7 +17,7 @@ system_essid <- function() {
   if (length(text) == 0) {
     
     warning("No valid adaptors detected...", call. = FALSE)
-    return(data.frame())
+    return(data_frame())
     
   }
   
@@ -31,10 +31,9 @@ system_essid <- function() {
   essid <- stringr::str_replace_all(essid, '"', "")
   
   # Build data frame
-  df <- data.frame(
+  df <- data_frame(
     adapter = adapter,
-    essid = essid,
-    stringsAsFactors = FALSE
+    essid = essid
   )
   
   return(df)

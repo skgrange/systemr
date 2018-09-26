@@ -18,12 +18,11 @@ system_usb_devices <- function() {
   text_split[, 7] <- stringr::str_trim(text_split[, 7])
   
   # Build data frame
-  df <- data.frame(
+  df <- data_frame(
     bus = as.integer(text_split[, 2]), 
     device = as.integer(text_split[, 4]), 
     id = text_split[, 6], 
-    description = text_split[, 7], 
-    stringsAsFactors = FALSE
+    description = text_split[, 7]
   )
   
   # Arrange

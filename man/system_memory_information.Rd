@@ -7,7 +7,7 @@
 system_memory_information()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to return a system's memory information.
