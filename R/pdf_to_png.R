@@ -14,7 +14,7 @@
 #' @return Invisible. 
 #' 
 #' @export
-pdf_to_png <- function(file, file_output, resolution = 300, verbose = FALSE) {
+pdf_to_png <- function(file, file_output = NA, resolution = 320, verbose = FALSE) {
   
   # Check if system programme is installed
   if (!pdftoppm_install_check()) 
@@ -34,6 +34,22 @@ pdf_to_png <- function(file, file_output, resolution = 300, verbose = FALSE) {
 
 pdf_to_png_worker <- function(file, file_output, resolution, verbose) {
   
+  # Ensure path is expanded, not really nessassary here
+  file <- path.expand(file)
+  
+  if (is.na(file_output))  {
+    
+    file_output <- basename(file)
+    file_output <- stringr::str_split_fixed(file_output, "\\.", 2)[, 1]
+    file_output <- stringr::str_c(file_output, ".png")
+    file_output <- file.path(getwd(), file_output)
+    
+  }
+  
+  # Quote file names
+  file <- shQuote(file)
+  file_output <- shQuote(file_output)
+  
   # Use redirect here
   command <- stringr::str_c(
     "pdftoppm -rx ", 
@@ -44,7 +60,7 @@ pdf_to_png_worker <- function(file, file_output, resolution, verbose) {
   )
   
   # Print
-  if (verbose) message(threadr::str_date_formatted(), ": ", file, "...")
+  if (verbose) message(threadr::date_message(), file, "...")
   
   # Do
   system(command)

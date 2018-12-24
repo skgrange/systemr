@@ -5,7 +5,7 @@
 \title{Function to convert a pdf file to a png file, usually used for single page 
 pdf images.}
 \usage{
-pdf_to_png(file, file_output, resolution = 300, verbose = FALSE)
+pdf_to_png(file, file_output = NA, resolution = 320, verbose = FALSE)
 }
 \arguments{
 \item{file}{Vector of file names.}
