@@ -23,12 +23,7 @@ system_who <- function() {
   comment <- purrr::map_chr(list_text, 5)
   
   # Build data frame
-  df <- data_frame(
-    name, 
-    line,
-    time, 
-    comment
-  )
+  df <- tibble(name, line, time, comment)
   
   return(df)
   

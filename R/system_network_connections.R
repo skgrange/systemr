@@ -31,12 +31,7 @@ system_network_connections <- function() {
   device <- ifelse(device == "--", NA, device)
   
   # Build data frame
-  df <- data_frame(
-    name,
-    uuid,
-    type,
-    device
-  )
+  df <- tibble(name, uuid, type, device)
   
   return(df)
   

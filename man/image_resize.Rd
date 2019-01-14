@@ -4,14 +4,14 @@
 \alias{image_resize}
 \title{Function to resize images with \code{ImageMagick}.}
 \usage{
-image_resize(file, quality = 2000, file_output = NA, verbose = FALSE)
+image_resize(file, file_output = NA, quality = 2000, verbose = FALSE)
 }
 \arguments{
 \item{file}{Vector of file names to be resized.}
 
-\item{quality}{Quality in pixels. Default is 1000 which is one megapixel.}
-
 \item{file_output}{Optional vector of output file names.}
+
+\item{quality}{Quality in pixels. Default is 2000 which is two megapixels.}
 
 \item{verbose}{Should the function give messages?}
 }

@@ -41,26 +41,20 @@ system_processes <- function(by = "cpu") {
   command <- stringr::str_trim(command)
   
   # Build data frame
-  df <- data_frame(
-    user,
-    pid, 
-    cpu,
-    memory,
-    command
-  )
+  df <- tibble(user, pid, cpu, memory, command)
   
   # Sort the data fame
   if (by == "cpu") {
     
-    df <- plyr::arrange(df, plyr::desc(cpu))
+    df <- arrange(df, dplyr::desc(cpu))
     
   } else if (by == "memory") {
     
-    df <- plyr::arrange(df, plyr::desc(memory))
+    df <- arrange(df, dplyr::desc(memory))
     
   } else if (by == "pid") {
     
-    df <- plyr::arrange(df, pid)
+    df <- arrange(df, pid)
     
   }
   

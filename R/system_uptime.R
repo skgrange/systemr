@@ -8,7 +8,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Tibble.
+#' @return Tibble or numeric vector. 
 #' 
 #' @export
 system_uptime <- function(round = TRUE, as.vector = FALSE) {
@@ -54,7 +54,7 @@ system_uptime <- function(round = TRUE, as.vector = FALSE) {
   date_hms <- format(date_hms)
   
   # Build data frame
-  df <- data_frame(
+  df <- tibble(
     date_up,
     date_system, 
     seconds_up = seconds,

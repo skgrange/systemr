@@ -27,7 +27,7 @@ system_disk_space <- function() {
   mount <- stringr::str_sub(text_no_header, start = index_mount)
   
   # Build data frame
-  df <- data_frame(
+  df <- tibble(
     file_system, 
     size_total = size,
     size_used = used,
@@ -37,7 +37,7 @@ system_disk_space <- function() {
   )
   
   # Clean and check data types
-  df[] <- lapply(df, clean_strings)
+  df <- dplyr::mutate_all(df, clean_strings)
   
   return(df)
 

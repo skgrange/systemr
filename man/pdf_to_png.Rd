@@ -10,7 +10,7 @@ pdf_to_png(file, file_output = NA, resolution = 320, verbose = FALSE)
 \arguments{
 \item{file}{Vector of file names.}
 
-\item{file_output}{Vector of output file names.}
+\item{file_output}{Optional vector of output file names.}
 
 \item{resolution}{Resolution of png file in DPI.}
 

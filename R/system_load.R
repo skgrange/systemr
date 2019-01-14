@@ -19,7 +19,7 @@ system_load <- function() {
   loads_percent <-  (text_split / cores) * 100
   
   # Build data frame
-  df <- data_frame(
+  df <- tibble(
     period = c("one_minute", "five_minute", "fifteen_minute"),
     load = text_split,
     load_percent = loads_percent

@@ -2,7 +2,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame.
+#' @return Tibble. 
 #' 
 #' @export
 system_usb_devices <- function() {
@@ -18,7 +18,7 @@ system_usb_devices <- function() {
   text_split[, 7] <- stringr::str_trim(text_split[, 7])
   
   # Build data frame
-  df <- data_frame(
+  df <- tibble(
     bus = as.integer(text_split[, 2]), 
     device = as.integer(text_split[, 4]), 
     id = text_split[, 6], 
@@ -26,7 +26,7 @@ system_usb_devices <- function() {
   )
   
   # Arrange
-  df <- plyr::arrange(df, bus, device)
+  df <- arrange(df, bus, device)
   
   return(df)
   

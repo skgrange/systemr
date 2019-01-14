@@ -14,7 +14,7 @@ seconds since boot time? This is the most efficient way to get this value and
 is suitable for multiple/continuous calling in a logging application.}
 }
 \value{
-Tibble.
+Tibble or numeric vector.
 }
 \description{
 Function to get system uptime.

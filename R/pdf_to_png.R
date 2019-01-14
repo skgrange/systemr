@@ -5,7 +5,7 @@
 #' 
 #' @param file Vector of file names. 
 #' 
-#' @param file_output Vector of output file names. 
+#' @param file_output Optional vector of output file names. 
 #' 
 #' @param resolution Resolution of png file in DPI. 
 #' 

@@ -7,7 +7,7 @@
 system_usb_devices()
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to return a system's USB devices from a \code{lsusb} system call.

@@ -4,26 +4,27 @@
 #' 
 #' @param file Vector of file names to be resized. 
 #' 
-#' @param quality Quality in pixels. Default is 1000 which is one megapixel. 
-#' 
 #' @param file_output Optional vector of output file names. 
+#' 
+#' @param quality Quality in pixels. Default is 2000 which is two megapixels. 
 #' 
 #' @param verbose Should the function give messages? 
 #' 
 #' @return Invisible. 
 #' 
 #' @export
-image_resize <- function(file, quality = 2000, file_output = NA, 
+image_resize <- function(file, file_output = NA, quality = 2000, 
                          verbose = FALSE) {
   
   # Check if image magick is installed
-  check_install <- image_magick_install()
+  if (!check_image_magick_install()) 
+    stop("ImageMagick is not detected...", call. = FALSE)
   
-  # Vectorise over file
+  # Do
   purrr::walk2(
-    .x = file, 
-    .y = file_output,
-    .f = image_resize_worker,
+    file, 
+    file_output,
+    image_resize_worker,
     quality = quality,
     verbose = verbose
   )
@@ -73,18 +74,18 @@ image_resize_worker <- function(file, file_output, quality, verbose) {
 }
 
 
-image_magick_install <- function() {
+check_image_magick_install <- function() {
   
   # Get version
   x <- system("convert -version", intern = TRUE)
   
-  if (!grepl("ImageMagick", x[1])) {
+  if (grepl("ImageMagick", x[1])) {
     
-    stop("ImageMagick is not detected...", call. = FALSE)
+    x <- TRUE
     
   } else {
     
-    x <- TRUE
+    x <- FALSE
     
   }
   

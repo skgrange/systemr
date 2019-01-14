@@ -21,9 +21,6 @@ system_directory_size <- function(directory, unit = "kb") {
   directory <- path.expand(directory)
   directory <- shQuote(directory)
   
-  # Create mapping data frame
-  df_map <- data_frame(directory, unit)
-  
   # Do
   df <- purrr::map2_dfr(directory, unit, system_directory_size_worker)
   
@@ -45,7 +42,7 @@ system_directory_size_worker <- function(directory, unit) {
   if (unit == "gb") x <- x / 1e+06
   
   # Build data frame to return
-  df <- data_frame(
+  df <- tibble(
     directory = directory, 
     size = x,
     unit = stringr::str_to_upper(unit)

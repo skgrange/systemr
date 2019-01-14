@@ -24,11 +24,10 @@ system_memory_information <- function() {
   matrix_values[, 2] <- ifelse(matrix_values[, 2] == "", NA, matrix_values[, 2])
   
   # Build data frame
-  df <- data.frame(
+  df <- tibble(
     variable = matrix_text[, 1],
     value = as.numeric(matrix_values[, 1]),
-    unit = matrix_values[, 2],
-    stringsAsFactors = FALSE
+    unit = matrix_values[, 2]
   )
   
   # Calculate if missing, for older systems
@@ -41,7 +40,7 @@ system_memory_information <- function() {
       pull()
     
     # Build data frame
-    df_extra <- data_frame(
+    df_extra <- tibble(
       variable = "mem_available",
       value = memory_available,
       unit = df$unit[1]
@@ -67,8 +66,7 @@ system_memory_information <- function() {
 system_memory_usage <- function() {
   
   # Get information
-  df <- system_memory_information() %>% 
-    dplyr::filter(variable %in% c("mem_total", "mem_available"))
+  df <- filter(system_memory_information(), variable %in% c("mem_total", "mem_available"))
   
   # Calculate percentage used
   x <- df$value[2] / df$value[1]

@@ -17,7 +17,7 @@ system_essid <- function() {
   if (length(text) == 0) {
     
     warning("No valid adaptors detected...", call. = FALSE)
-    return(data_frame())
+    return(tibble())
     
   }
   
@@ -31,10 +31,7 @@ system_essid <- function() {
   essid <- stringr::str_replace_all(essid, '"', "")
   
   # Build data frame
-  df <- data_frame(
-    adapter = adapter,
-    essid = essid
-  )
+  df <- tibble(adapter = adapter, essid = essid)
   
   return(df)
   

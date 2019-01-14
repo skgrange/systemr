@@ -31,11 +31,8 @@ system_mac_addresses <- function(format = FALSE) {
     
   }
   
-  # Build data frame
-  df <- data_frame(
-    adapter = adapter,
-    mac_address = mac_address
-  )
+  # Build tibble
+  df <- tibble(adapter = adapter, mac_address = mac_address)
   
   return(df)
   

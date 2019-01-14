@@ -63,7 +63,7 @@ synchronize_directory <- function(directory_local, directory_remote,
   if (calculate_size) {
    
     if (verbose) 
-      message(threadr::str_date_formatted(), ": Calculating size of directory...")
+      message(threadr::date_message(), ": Calculating size of directory...")
     
     size_directory_local <- system_directory_size(directory_local)$size 
     
@@ -79,7 +79,7 @@ synchronize_directory <- function(directory_local, directory_remote,
   if (dry_run) {
     
     message(
-      threadr::str_date_formatted(), 
+      threadr::date_message(), 
       ": `dry_run` selected, no files synchronized or modified..."
     )
     
@@ -89,7 +89,7 @@ synchronize_directory <- function(directory_local, directory_remote,
   date_system_end <- lubridate::now()
   
   # Build data frame for return
-  df <- data_frame(
+  df <- tibble(
     system = hostname(),
     task = "synchronize_directory",
     date_start = as.numeric(date_system_start),
@@ -99,7 +99,7 @@ synchronize_directory <- function(directory_local, directory_remote,
   # Add the extras
   df$time_elapsed_seconds <- df$date_end - df$date_start
   df$time_elapsed_hms <- str_hms(df$time_elapsed_seconds)
-  df$system_load_15_min <- system_load()[3, 3]
+  df$system_load_15_min <- system_load()[3, 3, drop = TRUE]
   df$size_directory_local <- size_directory_local
   df$command <- command
   
