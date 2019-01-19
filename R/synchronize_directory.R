@@ -63,7 +63,7 @@ synchronize_directory <- function(directory_local, directory_remote,
   if (calculate_size) {
    
     if (verbose) 
-      message(threadr::date_message(), ": Calculating size of directory...")
+      message(threadr::date_message(), "Calculating size of directory...")
     
     size_directory_local <- system_directory_size(directory_local)$size 
     
@@ -80,7 +80,7 @@ synchronize_directory <- function(directory_local, directory_remote,
     
     message(
       threadr::date_message(), 
-      ": `dry_run` selected, no files synchronized or modified..."
+      "`dry_run` selected, no files synchronized or modified..."
     )
     
   }
