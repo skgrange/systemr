@@ -7,7 +7,7 @@
 r_version()
 }
 \value{
-Tibble.
+Tibble with one row.
 }
 \description{
 Function to return a formatred \code{R.Version} call.
