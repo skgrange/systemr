@@ -4,13 +4,18 @@
 #' 
 #' @param date Creation date to update \code{file} with.
 #' 
+#' @param verbose Should the function give messages? 
+#' 
 #' @author Stuart K. Grange.
 #' 
 #' @export
-image_update_creation_date <- function(file, date) {
+image_update_creation_date <- function(file, date, verbose = FALSE) {
   
-  # Check if programme is installted
+  # Check if programme is installed
   detect_exiftool()
+  
+  # Message to user
+  if (verbose) message(threadr::date_message(), file)
   
   # Check date
   stopifnot(lubridate::is.POSIXt(date))
@@ -19,7 +24,7 @@ image_update_creation_date <- function(file, date) {
   file <- normalizePath(file)
   
   # Format for metadata
-  date_string <- format(date, format = "%Y:%m:%d %H:%M:%OS")
+  date_string <- format(date, format = "%Y:%m:%d %H:%M:%OS%z")
   
   # Update date time original
   command_date_time_original <- stringr::str_c("-datetimeoriginal=", date_string)

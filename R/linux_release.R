@@ -8,9 +8,14 @@
 linux_release <- function() {
   
   # Get and clean release call
-  text <- system("lsb_release -a", intern = TRUE, ignore.stderr = TRUE)
+  text <- tryCatch({
+    system("lsb_release -a", intern = TRUE, ignore.stderr = TRUE)
+  }, error = function(e) {
+    system("cat /etc/redhat-release", intern = TRUE, ignore.stderr = TRUE)
+  })  
   
   # Filter
+  text <- stringr::str_trim(text)
   text <- grep("^LSB", text, invert = TRUE, value = TRUE)
   text_split <- stringr::str_split_fixed(text, ":\t", 2)
   

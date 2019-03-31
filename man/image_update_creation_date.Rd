@@ -4,12 +4,14 @@
 \alias{image_update_creation_date}
 \title{Function to update an image's creation dates.}
 \usage{
-image_update_creation_date(file, date)
+image_update_creation_date(file, date, verbose = FALSE)
 }
 \arguments{
 \item{file}{File name.}
 
 \item{date}{Creation date to update \code{file} with.}
+
+\item{verbose}{Should the function give messages?}
 }
 \description{
 Function to update an image's creation dates.
