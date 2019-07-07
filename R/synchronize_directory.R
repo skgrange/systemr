@@ -1,7 +1,7 @@
 #' Function to synchronize a local and remote directory with \code{rsync}. 
 #' 
-#' \strong{Note}, \code{synchronize_directory} will delete files in the remote 
-#' directory if not present in the local directory by default. 
+#' \strong{Please note}, \code{synchronize_directory} will delete files in the 
+#' remote directory if not present in the local directory by default. 
 #' 
 #' @param directory_local Local directory to synchronize to remote directory. 
 #' 
@@ -31,6 +31,18 @@ synchronize_directory <- function(directory_local, directory_remote,
   # Always verbose when dry_run
   if (dry_run) verbose <- TRUE
   
+  # Message to user
+  if (verbose) {
+    message(
+      threadr::date_message(), 
+      "Synchronizing `",
+      directory_local, 
+      "` to `", 
+      directory_remote,
+      "`..."
+    )
+  }
+  
   # Get system date
   date_system_start <- lubridate::now()
   
@@ -44,10 +56,8 @@ synchronize_directory <- function(directory_local, directory_remote,
   
   # Drop a few things from command
   if (!verbose) {
-    
     command <- stringr::str_replace(command, "-ravh", "-rah")
     command <- stringr::str_remove(command, "--progress")
-    
   }
   
   # Drop dry run
@@ -62,27 +72,24 @@ synchronize_directory <- function(directory_local, directory_remote,
   # Get size to be synchronized
   if (calculate_size) {
    
-    if (verbose) 
+    if (verbose) {
       message(threadr::date_message(), "Calculating size of directory...")
-    
+    }
+
     size_directory_local <- system_directory_size(directory_local)$size 
     
   } else {
-    
     size_directory_local <- NA
-    
   }
   
   # Do the synchronisation with rsync
   system(command)
   
   if (dry_run) {
-    
     message(
       threadr::date_message(), 
       "`dry_run` selected, no files synchronized or modified..."
     )
-    
   }
   
   # Get system date

@@ -29,8 +29,8 @@ default.}
 Tibble with programme timing information.
 }
 \description{
-\strong{Note}, \code{synchronize_directory} will delete files in the remote 
-directory if not present in the local directory by default.
+\strong{Please note}, \code{synchronize_directory} will delete files in the 
+remote directory if not present in the local directory by default.
 }
 \author{
 Stuart K. Grange
