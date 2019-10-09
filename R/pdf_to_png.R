@@ -17,8 +17,9 @@
 pdf_to_png <- function(file, file_output = NA, resolution = 320, verbose = FALSE) {
   
   # Check if system programme is installed
-  if (!pdftoppm_install_check()) 
+  if (!pdftoppm_install_check()) {
     stop("`pdftoppm` system programme is not installed...", call. = FALSE)
+  }
   
   # Do
   purrr::walk2(
@@ -34,21 +35,18 @@ pdf_to_png <- function(file, file_output = NA, resolution = 320, verbose = FALSE
 
 pdf_to_png_worker <- function(file, file_output, resolution, verbose) {
   
-  # Ensure path is expanded, not really nessassary here
-  file <- path.expand(file)
+  # Ensure path is expanded 
+  file <- fs::path_expand(file)
   
+  # Make file name if not given
   if (is.na(file_output))  {
-    
-    file_output <- basename(file)
-    file_output <- stringr::str_split_fixed(file_output, "\\.", 2)[, 1]
-    file_output <- stringr::str_c(file_output, ".png")
-    file_output <- file.path(getwd(), file_output)
-    
+    file_output <- file %>% 
+      fs::path() %>% 
+      fs::path_ext_remove() %>% 
+      stringr::str_c(".png")
+  } else {
+    file_output <- fs::path_expand(file_output)
   }
-  
-  # Quote file names
-  file <- shQuote(file)
-  file_output <- shQuote(file_output)
   
   # Use redirect here
   command <- stringr::str_c(
@@ -78,18 +76,12 @@ pdftoppm_install_check <- function() {
   )
   
   # Test
-  x <- if (length(x) == 0) {
-    
+  if (length(x) == 0) {
     x <- FALSE
-    
   } else if (grepl("pdftoppm", x, ignore.case = TRUE)) {
-    
     x <- TRUE
-    
   } else {
-    
     x <- FALSE
-    
   }
   
   return(x)

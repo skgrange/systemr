@@ -20,13 +20,9 @@ system_sensors <- function() {
   
   # System call
   text <- tryCatch({
-    
     system("sensors", intern = TRUE, ignore.stderr = TRUE)
-    
   }, error = function(e) {
-    
     character()
-    
   })
   
   # acpitz-virtual-0 is the temperature sensor near/on your CPU socket. This sensor can be unreliable.
