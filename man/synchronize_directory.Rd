@@ -4,9 +4,14 @@
 \alias{synchronize_directory}
 \title{Function to synchronize a local and remote directory with \code{rsync}.}
 \usage{
-synchronize_directory(directory_local, directory_remote,
-  calculate_size = TRUE, dry_run = TRUE, delete = TRUE,
-  verbose = TRUE)
+synchronize_directory(
+  directory_local,
+  directory_remote,
+  calculate_size = TRUE,
+  dry_run = TRUE,
+  delete = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{directory_local}{Local directory to synchronize to remote directory.}

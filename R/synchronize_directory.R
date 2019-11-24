@@ -49,8 +49,8 @@ synchronize_directory <- function(directory_local, directory_remote,
   # Build rsync command
   command <- stringr::str_c(
     "rsync -ravh --progress --delete -dryrun", 
-    directory_local,
-    directory_remote, 
+    shQuote(directory_local, type = "sh"),
+    shQuote(directory_remote, type = "sh"),
     sep = " "
   )
   
