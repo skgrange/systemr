@@ -8,6 +8,8 @@
 #' 
 #' @author Stuart K. Grange.
 #' 
+#' @return Invisible \code{file}. 
+#' 
 #' @export
 image_update_creation_date <- function(file, date, verbose = FALSE) {
   
@@ -15,7 +17,7 @@ image_update_creation_date <- function(file, date, verbose = FALSE) {
   detect_exiftool()
   
   # Message to user
-  if (verbose) message(threadr::date_message(), file)
+  if (verbose) message(threadr::date_message(), "`", file, "`...")
   
   # Check date
   stopifnot(lubridate::is.POSIXt(date))

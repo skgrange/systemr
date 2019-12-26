@@ -58,12 +58,12 @@ pdf_to_png_worker <- function(file, file_output, resolution, verbose) {
   )
   
   # Print
-  if (verbose) message(threadr::date_message(), file, "...")
+  if (verbose) message(threadr::date_message(), "`", file, "`...")
   
   # Do
   system(command)
   
-  # No return
+  return(invisible(file))
   
 }
 

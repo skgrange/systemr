@@ -13,6 +13,9 @@ image_update_creation_date(file, date, verbose = FALSE)
 
 \item{verbose}{Should the function give messages?}
 }
+\value{
+Invisible \code{file}.
+}
 \description{
 Function to update an image's creation dates.
 }
