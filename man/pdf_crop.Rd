@@ -4,12 +4,14 @@
 \alias{pdf_crop}
 \title{Function to crop a pdf file.}
 \usage{
-pdf_crop(file, file_output = NA)
+pdf_crop(file, file_output = NA, verbose = FALSE)
 }
 \arguments{
 \item{file}{Vector of file names.}
 
 \item{file_output}{Optional vector of output file names.}
+
+\item{verbose}{Should the function give messages?}
 }
 \value{
 Invisible list.

@@ -8,24 +8,29 @@
 #' 
 #' @param file_output Optional vector of output file names. 
 #' 
+#' @param verbose Should the function give messages? 
+#' 
 #' @return Invisible list. 
 #' 
 #' @export
-pdf_crop <- function(file, file_output = NA) {
+pdf_crop <- function(file, file_output = NA, verbose = FALSE) {
   
   purrr::walk2(
     file,
     file_output,
-    pdf_crop_worker
+    pdf_crop_worker,
+    verbose = verbose
   )
   
 }
 
 
-pdf_crop_worker <- function(file, file_output) {
+pdf_crop_worker <- function(file, file_output, verbose) {
   
   # Ensure path is expanded 
   file <- fs::path_expand(file)
+  
+  if (verbose) message(threadr::date_message(), "`", file, "`...")
   
   # Make file name if not given
   if (is.na(file_output))  {
