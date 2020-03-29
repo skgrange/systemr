@@ -3,6 +3,7 @@
 export("%>%")
 export(free)
 export(hostname)
+export(image_raw_to_jpg)
 export(image_resize)
 export(image_update_creation_date)
 export(linux_release)
