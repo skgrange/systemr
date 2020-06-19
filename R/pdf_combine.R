@@ -16,6 +16,7 @@ pdf_combine <- function(file = NA, file_output = "combined_file.pdf",
                         verbose = FALSE) {
   
   # Parse output
+  file_output <- fs::path_expand(file_output)
   file_output <- shQuote(file_output)
   
   # Build commands
