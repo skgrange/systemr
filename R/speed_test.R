@@ -50,10 +50,9 @@ speed_test <- function(verbose = TRUE) {
     system = hostname(),
     host = host,
     server = server,
+    unit = text_download[, 3],
     download = as.numeric(text_download[, 2]),
-    download_unit = text_download[, 3],
-    upload = as.numeric(text_upload[, 2]),
-    upload_unit = text_upload[, 3]
+    upload = as.numeric(text_upload[, 2])
   )
   
   return(df)
