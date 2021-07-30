@@ -22,10 +22,10 @@ at this time.}
 Invisible list.
 }
 \description{
-\code{image_raw_to_jpg} requires \code{ufraw-batch} to be installed.
+\code{image_raw_to_jpg} requires \code{darktable-cli} to be installed.
 }
 \seealso{
-\url{https://helpmanual.io/man1/ufraw-batch/}
+\url{https://www.darktable.org/usermanual/en/special-topics/program-invocation/darktable-cli}
 }
 \author{
 Stuart K. Grange

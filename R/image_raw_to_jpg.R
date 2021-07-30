@@ -1,7 +1,7 @@
 #' Function to convert raw image files (usually \code{CR2}) to \code{jpg} image
 #' files. 
 #' 
-#' \code{image_raw_to_jpg} requires \code{ufraw-batch} to be installed. 
+#' \code{image_raw_to_jpg} requires \code{darktable-cli} to be installed. 
 #' 
 #' @param file Vector of raw image file names to be converted. 
 #' 
@@ -15,7 +15,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @seealso \url{https://helpmanual.io/man1/ufraw-batch/}
+#' @seealso \url{https://www.darktable.org/usermanual/en/special-topics/program-invocation/darktable-cli}
 #' 
 #' @return Invisible list. 
 #' 
@@ -23,19 +23,18 @@
 image_raw_to_jpg <- function(file, file_output = NA, format = "jpg", 
                              verbose = FALSE) {
   
-  # Check for programme
-  stopifnot(stringr::str_detect(detect_ufraw_batch(), "ufraw-batch"))
-  
+  # Check if system programme is installed
+  stopifnot(stringr::str_detect(detect_darktable_cli(), "darktable-cli"))
   stopifnot(format == "jpg")
   
   # Parse input
   file <- fs::path_expand(file)
   
-  # 
+  # Build output file names
   if (is.na(file_output[1])) {
     file_output <- file %>% 
       fs::path_ext_remove() %>% 
-      stringr::str_c("_converted") %>% 
+      stringr::str_c("_converted_from_raw") %>% 
       fs::path(ext = "jpg")
   } else {
     file_output <- fs::path_expand(file_output)
@@ -68,27 +67,18 @@ image_raw_to_jpg_worker <- function(file, file_output, format, verbose) {
   # Message to user
   if (verbose) message(threadr::date_message(), "`", file, "`...")
   
-  # 
-  command_output <- stringr::str_c("--output=", file_output)
-  
-  # Do
-  x <- tryCatch({
-    processx::run(
-      "ufraw-batch", args = c("--out-type", format, file, command_output),
-      echo_cmd = FALSE,
-      echo = FALSE
-    )
-  }, error = function(e) {
-    NULL
-  })
+  # Use darktable to convert the image
+  x <- processx::run(
+    "darktable-cli", args = c(file, file_output), echo_cmd = FALSE, echo = FALSE
+  )
   
   return(invisible(x))
   
 }
 
 
-detect_ufraw_batch <- function() {
+detect_darktable_cli <- function() {
   processx::run(
-    "which", args = "ufraw-batch"
+    "which", args = "darktable-cli"
   )$stdout
 }
