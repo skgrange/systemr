@@ -10,7 +10,7 @@ system_cpu_core_count(logical_cores = TRUE, max_cores = NA)
 \item{logical_cores}{Should logical cores be included in the core count?}
 
 \item{max_cores}{Should the return have a maximum value? This can be useful 
-when there are hundreds of cores and logic is being built.}
+when there are very many cores and logic is being built.}
 }
 \value{
 Integer vector with length of 1.
@@ -19,6 +19,7 @@ Integer vector with length of 1.
 Function to return the system's number of CPU cores.
 }
 \examples{
+
 # Find core count
 system_cpu_core_count()
 
