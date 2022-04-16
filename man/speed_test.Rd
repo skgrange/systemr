@@ -4,9 +4,14 @@
 \alias{speed_test}
 \title{Function to run the \code{speedtest-cli} internet bandwidth programme.}
 \usage{
-speed_test(verbose = TRUE)
+speed_test(n = 1, sleep = NA, verbose = TRUE)
 }
 \arguments{
+\item{n}{Number of times to run the speed test.}
+
+\item{sleep}{If \code{n} is not 1, the number of seconds to sleep before 
+speed tests.}
+
 \item{verbose}{Should the function give messages?}
 }
 \value{
