@@ -6,7 +6,7 @@
 #' 
 #' @param file Vector of file names. 
 #' 
-#' @param file_output Optional vector of output file names. 
+#' @param file_output An optional vector of output file names. 
 #' 
 #' @param verbose Should the function give messages? 
 #' 

@@ -9,7 +9,7 @@ pdf_crop(file, file_output = NA, verbose = FALSE)
 \arguments{
 \item{file}{Vector of file names.}
 
-\item{file_output}{Optional vector of output file names.}
+\item{file_output}{An optional vector of output file names.}
 
 \item{verbose}{Should the function give messages?}
 }
