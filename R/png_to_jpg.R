@@ -11,41 +11,40 @@
 #' 
 #' @param verbose Should the function give messages? 
 #' 
-#' @return Invisible.
+#' @return Invisible \code{NULL}.
 #' 
 #' @export
-png_to_jpeg <- function(file, file_output = NA, quality = 95, verbose = FALSE) {
+png_to_jpg <- function(file, file_output = NA, quality = 95, verbose = FALSE) {
   
   # Check if image magick is installed
-  if (!check_image_magick_install()) 
-    stop("ImageMagick is not detected...", call. = FALSE)
+  if (!check_image_magick_install()) {
+    stop("ImageMagick is not detected.", call. = FALSE) 
+  }
   
   # Do
   purrr::walk2(
     file,
     file_output,
-    png_to_jpeg_worker,
+    png_to_jpg_worker,
     quality = quality,
     verbose = verbose
   )
   
-  # No return
+  return(invisible(NULL))
 
 }
 
 
-png_to_jpeg_worker <- function(file, file_output, quality, verbose) {
+png_to_jpg_worker <- function(file, file_output, quality, verbose) {
   
-  # Ensure path is expanded, not really nessassary here
+  # Ensure path is expanded, not really necessary here
   file <- path.expand(file)
   
   if (is.na(file_output))  {
-    
     file_output <- basename(file)
     file_output <- stringr::str_split_fixed(file_output, "\\.", 2)[, 1]
     file_output <- stringr::str_c(file_output, ".jpg")
     file_output <- file.path(getwd(), file_output)
-    
   }
   
   # Quote file names
@@ -63,13 +62,13 @@ png_to_jpeg_worker <- function(file, file_output, quality, verbose) {
   # Do
   system(command)
   
-  # No return
+  return(invisible(file))
   
 }
 
 
 # An alias
-#' @rdname png_to_jpeg
+#' @rdname png_to_jpg
 #' 
 #' @export
-png_to_jpg <- png_to_jpeg
+png_to_jpeg <- png_to_jpg
