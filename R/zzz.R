@@ -9,7 +9,8 @@ if (getRversion() >= "2.15.1") {
     ".", "variable", "date_start", "value", "bus", "device", "language", "major", 
     "minor", "version_string_short", "nickname", "version_major_minor", 
     "abbreviation", "countryCode", "countryName", "date_api", "daylight_savings", 
-    "dst", "gmtOffset", "id", "timestamp", "zoneName"
+    "dst", "gmtOffset", "id", "timestamp", "zoneName", ".attrs", "location", 
+    "mountpoint", "playlist"
   )
   
   # Squash the note
