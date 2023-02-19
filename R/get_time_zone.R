@@ -15,17 +15,26 @@
 #' 
 #' @param verbose Should the function give messages? 
 #' 
+#' @param progress Should a progress bar be displayed? 
+#' 
 #' @param df Data frame/tibble return from \code{get_time_zone}. 
 #' 
 #' @return Tibble. 
 #' 
 #' @export
-get_time_zone <- function(list, key, sleep = 1, verbose = FALSE) {
+get_time_zone <- function(list, key, sleep = 1, progress = FALSE,
+                          verbose = FALSE) {
   
   # Vectorise function, keep the id variable here for joining
-  purrr::pmap_dfr(
-    list, get_time_zone_worker, key = key, sleep = sleep, verbose = verbose
-  )
+  purrr::pmap(
+    list, 
+    get_time_zone_worker, 
+    key = key, 
+    sleep = sleep, 
+    verbose = verbose,
+    .progress = progress
+  ) %>% 
+    purrr::list_rbind()
   
 }
 
