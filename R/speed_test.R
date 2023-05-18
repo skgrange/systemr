@@ -14,6 +14,9 @@
 #' @export
 speed_test <- function(n = 1, sleep = NA, verbose = TRUE) {
   
+  # Test if programme exists, this will error if the programme is not installed
+  invisible(processx::run("which", "speedtest"))
+  
   # If n is 1, no sleep is needed
   if (n == 1 && !is.na(sleep)) {
     sleep <- NA
@@ -31,8 +34,6 @@ speed_test <- function(n = 1, sleep = NA, verbose = TRUE) {
 
 speed_test_worker <- function(sleep, verbose) {
   
-  # TODO: Test for programme
-  
   # Get system date
   date_system <- lubridate::now()
   
@@ -43,29 +44,29 @@ speed_test_worker <- function(sleep, verbose) {
     NULL
   })
 
-  # If fails return here
+  # If the programme fails, return here
   if (is.null(list_speed)) return(tibble())
 
   # Format text output
   text_output <- list_speed$stdout %>%
     stringr::str_split("\n") %>%
     .[[1]]
-
+  
   # Format the pieces
   text_download <- text_output %>%
     stringr::str_subset("Download") %>%
     stringr::str_split_fixed(": | ", 3)
-
+  
   text_upload <- text_output %>%
     stringr::str_subset("Upload") %>%
     stringr::str_split_fixed(": | ", 3)
-
+  
   host <- text_output %>%
     stringr::str_subset("Testing from") %>%
     stringr::str_remove_all("Testing from |\\.\\.\\.")
 
   server <- stringr::str_subset(text_output, "Hosted by")
-
+  
   # Build tibble
   df <- tibble(
     date = date_system,
@@ -76,7 +77,7 @@ speed_test_worker <- function(sleep, verbose) {
     download = as.numeric(text_download[, 2]),
     upload = as.numeric(text_upload[, 2])
   )
-
+  
   # Sleep between runs
   if (!is.na(sleep)) {
     Sys.sleep(sleep)
