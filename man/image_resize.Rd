@@ -4,7 +4,13 @@
 \alias{image_resize}
 \title{Function to resize images with \code{ImageMagick}.}
 \usage{
-image_resize(file, file_output = NA, quality = 2000, verbose = FALSE)
+image_resize(
+  file,
+  file_output = NA,
+  quality = 2000,
+  verbose = FALSE,
+  progress = FALSE
+)
 }
 \arguments{
 \item{file}{Vector of file names to be resized.}
@@ -14,9 +20,11 @@ image_resize(file, file_output = NA, quality = 2000, verbose = FALSE)
 \item{quality}{Quality in pixels. Default is 2000 which is two megapixels.}
 
 \item{verbose}{Should the function give messages?}
+
+\item{progress}{Should a progress bar be displayed?}
 }
 \value{
-Invisible.
+Invisible system command.
 }
 \description{
 Function to resize images with \code{ImageMagick}.

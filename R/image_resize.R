@@ -10,15 +10,18 @@
 #' 
 #' @param verbose Should the function give messages? 
 #' 
-#' @return Invisible. 
+#' @param progress Should a progress bar be displayed? 
+#' 
+#' @return Invisible system command. 
 #' 
 #' @export
 image_resize <- function(file, file_output = NA, quality = 2000, 
-                         verbose = FALSE) {
+                         verbose = FALSE, progress = FALSE) {
   
   # Check if image magick is installed
-  if (!check_image_magick_install()) 
-    stop("ImageMagick is not detected...", call. = FALSE)
+  if (!check_image_magick_install()) {
+    stop("ImageMagick is not detected.", call. = FALSE)
+  }
   
   # Do
   purrr::walk2(
@@ -26,7 +29,8 @@ image_resize <- function(file, file_output = NA, quality = 2000,
     file_output,
     image_resize_worker,
     quality = quality,
-    verbose = verbose
+    verbose = verbose,
+    .progress = progress
   )
   
 }
@@ -34,7 +38,7 @@ image_resize <- function(file, file_output = NA, quality = 2000,
 
 image_resize_worker <- function(file, file_output, quality, verbose) {
   
-  # Ensure path is expanded, not really nessassary here
+  # Ensure path is expanded, not really necessary here
   file <- path.expand(file)
   
   if (is.na(file_output))  {
@@ -65,11 +69,15 @@ image_resize_worker <- function(file, file_output, quality, verbose) {
     file_output
   )
   
-  # Give message
-  if (verbose) message(command)
+  # Give a message
+  if (verbose) {
+    cli::cli_alert_info(command)
+  }
   
-  # Do
+  # System call
   system(command)
+  
+  return(invisible(command))
   
 }
 
@@ -80,13 +88,9 @@ check_image_magick_install <- function() {
   x <- system("convert -version", intern = TRUE)
   
   if (grepl("ImageMagick", x[1])) {
-    
     x <- TRUE
-    
   } else {
-    
     x <- FALSE
-    
   }
   
   return(x)
