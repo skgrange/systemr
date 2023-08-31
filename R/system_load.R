@@ -1,30 +1,55 @@
-#' Function to get system loads.
+#' Function to return formatted system loads.
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Tibble. 
+#' @param as_vector Should a numeric vector be returned rather than a tibble? 
+#' 
+#' @return Tibble or when \code{as_vector} is \code{TRUE}, a numeric vector of
+#' # loads in percent. 
+#' 
+#' @examples
+#' 
+#' # Return a tibble
+#' system_load()
+#' 
+#' # Return a numeric vector, in percent
+#' system_load(as_vector = TRUE)
 #' 
 #' @export
-system_load <- function() {
+system_load <- function(as_vector = FALSE) {
   
-  # Get and clean load averages
-  text <- system("cat /proc/loadavg", intern = TRUE)
-  text_split <- stringr::str_split(text, " ")[[1]][1:3]
-  text_split <- as.numeric(text_split)
+  # Read load averages from system
+  loads_text <- readLines("/proc/loadavg", n = 1)
   
-  # Get cores
-  cores <- parallel::detectCores()
+  # Make a numeric vector
+  loads_numeric <- loads_text %>% 
+    stringr::str_split_1(" ") %>% 
+    .[1:3] %>% 
+    as.numeric()
+  
+  # Get cpu core count
+  n_cores <- parallel::detectCores()
   
   # Calculate percent
-  loads_percent <-  (text_split / cores) * 100
+  loads_percent <-  (loads_numeric / n_cores) * 100
   
-  # Build data frame
-  df <- tibble(
-    period = c("one_minute", "five_minute", "fifteen_minute"),
-    load = text_split,
-    load_percent = loads_percent
-  )
-  
-  return(df)
-  
+  # Two different returns
+  if (as_vector) {
+    
+    # Only the loads in percent
+    return(loads_percent)
+    
+  } else {
+    
+    # Build tibble
+    df <- tibble(
+      period = c("one_minute", "five_minute", "fifteen_minute"),
+      load = loads_numeric,
+      load_percent = loads_percent
+    )
+    
+    return(df)
+    
+  }
+
 }

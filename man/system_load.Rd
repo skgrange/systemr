@@ -2,15 +2,28 @@
 % Please edit documentation in R/system_load.R
 \name{system_load}
 \alias{system_load}
-\title{Function to get system loads.}
+\title{Function to return formatted system loads.}
 \usage{
-system_load()
+system_load(as_vector = FALSE)
+}
+\arguments{
+\item{as_vector}{Should a numeric vector be returned rather than a tibble?}
 }
 \value{
-Tibble.
+Tibble or when \code{as_vector} is \code{TRUE}, a numeric vector of
+# loads in percent.
 }
 \description{
-Function to get system loads.
+Function to return formatted system loads.
+}
+\examples{
+
+# Return a tibble
+system_load()
+
+# Return a numeric vector, in percent
+system_load(as_vector = TRUE)
+
 }
 \author{
 Stuart K. Grange
