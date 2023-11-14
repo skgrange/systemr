@@ -11,7 +11,7 @@ if (getRversion() >= "2.15.1") {
     "abbreviation", "countryCode", "countryName", "date_api", "daylight_savings", 
     "dst", "gmtOffset", "id", "timestamp", "zoneName", ".attrs", "location", 
     "mountpoint", "playlist", "status", "query", "country", "country_code", 
-    "zip", "lat", "lon", "timezone"
+    "zip", "lat", "lon", "timezone", "formatted"
   )
   
   # Squash the note

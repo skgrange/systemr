@@ -22,8 +22,8 @@
 #' @return Tibble. 
 #' 
 #' @export
-get_time_zone <- function(list, key, sleep = 1, progress = FALSE,
-                          verbose = FALSE) {
+get_time_zone <- function(list, key, sleep = 1, verbose = FALSE,
+                          progress = FALSE) {
   
   # Vectorise function, keep the id variable here for joining
   purrr::pmap(
@@ -59,8 +59,8 @@ get_time_zone_worker <- function(id, date, latitude, longitude, key,
   
   # Message to user
   if (verbose) {
-    url_no_key <- stringr::str_replace(url, key, "***")
-    message(threadr::date_message(), "`", url_no_key, "`...")
+    url_no_key <- stringr::str_replace(url, key, "*")
+    cli::cli_alert_info("{threadr::cli_date()} `{url_no_key}`...")
   }
   
   # Get and parse json
@@ -69,7 +69,14 @@ get_time_zone_worker <- function(id, date, latitude, longitude, key,
     threadr::read_json() %>% 
     purrr::compact() %>% 
     as_tibble() %>% 
-    mutate(id = !!id) %>% 
+    mutate(
+      id = !!id,
+      dplyr::across(
+        c(message, zoneName, abbreviation, formatted), 
+        ~if_else(. == "", NA_character_, .)
+      ),
+      dst = as.logical(as.integer(dst))
+    ) %>% 
     relocate(id)
   
   # Sleep to keep the server happy
@@ -85,8 +92,7 @@ get_time_zone_worker <- function(id, date, latitude, longitude, key,
 clean_time_zone_table <- function(df) {
   
   df %>% 
-    mutate(date_api = threadr::parse_unix_time(timestamp, tz = "UTC"),
-           daylight_savings = as.logical(as.integer(dst))) %>% 
+    mutate(date_api = threadr::parse_unix_time(timestamp, tz = "UTC")) %>% 
     select(id,
            date_api, 
            country_iso_code = countryCode,
@@ -94,6 +100,6 @@ clean_time_zone_table <- function(df) {
            time_zone = zoneName,
            time_zone_abbreviation = abbreviation,
            utc_offset = gmtOffset,
-           daylight_savings)
+           daylight_savings = dst)
   
 }

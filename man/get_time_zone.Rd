@@ -6,7 +6,7 @@
 \title{Function to get time zone information from a date, latitude, and longitude 
 triad from \url{https://timezonedb.com/api}.}
 \usage{
-get_time_zone(list, key, sleep = 1, progress = FALSE, verbose = FALSE)
+get_time_zone(list, key, sleep = 1, verbose = FALSE, progress = FALSE)
 
 clean_time_zone_table(df)
 }
@@ -19,9 +19,9 @@ clean_time_zone_table(df)
 \item{sleep}{Number of seconds to sleep between API queries. One second 
 between queries is needed when a non-paid version of the API is being used.}
 
-\item{progress}{Should a progress bar be displayed?}
-
 \item{verbose}{Should the function give messages?}
+
+\item{progress}{Should a progress bar be displayed?}
 
 \item{df}{Data frame/tibble return from \code{get_time_zone}.}
 }
