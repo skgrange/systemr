@@ -12,7 +12,7 @@
 #' 
 #' @param progress Should a progress bar be displayed? 
 #' 
-#' @return Invisible system command. 
+#' @return Invisible list. 
 #' 
 #' @export
 image_resize <- function(file, file_output = NA, quality = 2000, 
@@ -39,10 +39,15 @@ image_resize <- function(file, file_output = NA, quality = 2000,
 image_resize_worker <- function(file, file_output, quality, verbose) {
   
   # Ensure path is expanded, not really necessary here
-  file <- path.expand(file)
+  file <- fs::path_expand(file)
   
+  # Message to user
+  if (verbose) {
+    cli::cli_alert_info("{threadr::cli_date()} Resizing `{file}`...")
+  }
+  
+  # Build an output file name if not supplied
   if (is.na(file_output))  {
-    
     file_output <- basename(file)
     file_output <- stringr::str_split(file_output, "\\.")[[1]]
     file_suffix <- file_output[length(file_output)]
@@ -50,34 +55,18 @@ image_resize_worker <- function(file, file_output, quality, verbose) {
     file_output <- stringr::str_c(file_output, collapse = "")
     file_output <- stringr::str_c(file_output, "_resized")
     file_output <- stringr::str_c(file_output, ".", file_suffix)
-    file_output <- file.path(getwd(), file_output)
-    
+    file_output <- fs::path(getwd(), file_output)
   }
   
-  # Quote file names
-  file <- shQuote(file)
-  file_output <- shQuote(file_output)
-  
-  # Parse quality
+  # Build quality strgin
   quality <- stringr::str_c(quality, "X", quality)
   
-  # Build command
-  command <- stringr::str_c(
-    "convert -resize ", 
-    quality, " ", 
-    file, " ", 
-    file_output
+  # Do the resizing with image magick
+  process <- processx::run(
+    "convert", args = c("-resize", quality, file, file_output)
   )
   
-  # Give a message
-  if (verbose) {
-    cli::cli_alert_info(command)
-  }
-  
-  # System call
-  system(command)
-  
-  return(invisible(command))
+  return(invisible(process))
   
 }
 

@@ -24,7 +24,7 @@ image_resize(
 \item{progress}{Should a progress bar be displayed?}
 }
 \value{
-Invisible system command.
+Invisible list.
 }
 \description{
 Function to resize images with \code{ImageMagick}.
