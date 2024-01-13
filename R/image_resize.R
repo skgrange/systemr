@@ -20,7 +20,7 @@ image_resize <- function(file, file_output = NA, quality = 2000,
   
   # Check if image magick is installed
   if (!check_image_magick_install()) {
-    stop("ImageMagick is not detected.", call. = FALSE)
+    cli::cli_abort("ImageMagick is not detected.")
   }
   
   # Do
