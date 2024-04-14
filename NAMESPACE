@@ -2,6 +2,7 @@
 
 export("%>%")
 export(clean_time_zone_table)
+export(file_copy_n)
 export(format_microbenchmark_return)
 export(free)
 export(get_device_read_speeds)
