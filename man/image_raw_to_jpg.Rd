@@ -5,7 +5,13 @@
 \title{Function to convert raw image files (usually \code{CR2}) to \code{jpg} image
 files.}
 \usage{
-image_raw_to_jpg(file, file_output = NA, format = "jpg", verbose = FALSE)
+image_raw_to_jpg(
+  file,
+  file_output = NA,
+  format = "jpg",
+  verbose = FALSE,
+  progress = FALSE
+)
 }
 \arguments{
 \item{file}{Vector of raw image file names to be converted.}
@@ -17,6 +23,8 @@ image_raw_to_jpg(file, file_output = NA, format = "jpg", verbose = FALSE)
 at this time.}
 
 \item{verbose}{Should the function give messages?}
+
+\item{progress}{Should a progress bar be displayed?}
 }
 \value{
 Invisible list.

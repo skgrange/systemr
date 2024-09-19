@@ -13,6 +13,8 @@
 #' 
 #' @param verbose Should the function give messages? 
 #' 
+#' @param progress Should a progress bar be displayed? 
+#' 
 #' @author Stuart K. Grange
 #' 
 #' @seealso \url{https://www.darktable.org/usermanual/en/special-topics/program-invocation/darktable-cli}
@@ -21,7 +23,7 @@
 #' 
 #' @export
 image_raw_to_jpg <- function(file, file_output = NA, format = "jpg", 
-                             verbose = FALSE) {
+                             verbose = FALSE, progress = FALSE) {
   
   # Check if system programme is installed
   stopifnot(stringr::str_detect(detect_darktable_cli(), "darktable-cli"))
@@ -42,9 +44,8 @@ image_raw_to_jpg <- function(file, file_output = NA, format = "jpg",
   
   # Check
   if (any(fs::file_exists(file_output))) {
-    stop(
-      "Output files exist, this programme will not overwrite these files...",
-      call. = FALSE
+    cli::cli_abort(
+      "Output files exist, this programme will not overwrite these files..."
     )
   }
   
@@ -54,7 +55,8 @@ image_raw_to_jpg <- function(file, file_output = NA, format = "jpg",
     file_output, 
     image_raw_to_jpg_worker, 
     format = format, 
-    verbose = verbose
+    verbose = verbose,
+    .progress = progress
   )
   
   return(invisible(x))
