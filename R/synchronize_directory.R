@@ -116,13 +116,13 @@ synchronize_directory <- function(directory_local, directory_remote,
 
 
 # From threadr
-str_hms <- function (x, round = NA) {
+str_hms <- function(x, round = NA) {
   stopifnot(any(c("hms", "numeric", "integer") %in% class(x)))
   if (any(c("numeric", "integer") %in% class(x))) 
-    x <- hms::as.hms(x)
+    x <- hms::as_hms(x)
   if (!is.na(round)) {
     x <- round(x, round)
-    x <- hms::as.hms(x)
+    x <- hms::as_hms(x)
   }
   x <- format(x)
   x <- stringr::str_trim(x)

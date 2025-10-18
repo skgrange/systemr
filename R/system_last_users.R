@@ -21,7 +21,7 @@ system_last_users <- function() {
   text_filter <- stringr::str_replace_all(text_filter, "still running", "still_running")
   text_filter <- stringr::str_replace_all(text_filter, "\\s+", " ")
   
-  # Only first occurance, stringr fails here
+  # Only first occurrence, stringr fails here
   text_filter <- sub("*\\(.*?\\) *", "to_level", text_filter)
   
   # Split into variables
@@ -48,7 +48,7 @@ system_last_users <- function() {
   
   # Transform
   df$time_elapsed_seconds <- as.numeric(df$date_end) - as.numeric(df$date_start)
-  df$time_elapsed_hms <- hms::as.hms(df$time_elapsed_seconds)
+  df$time_elapsed_hms <- hms::as_hms(df$time_elapsed_seconds)
   df$time_elapsed_hms <- format(df$time_elapsed_hms)
   
   # Arrange

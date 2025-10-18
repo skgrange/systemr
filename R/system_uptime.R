@@ -33,10 +33,8 @@ system_uptime <- function(round = TRUE, as.vector = FALSE) {
   seconds <- as.numeric(seconds)
   
   if (round) {
-   
     date_system <- round(date_system)
-    seconds <- round(seconds) 
-    
+    seconds <- round(seconds)
   }
   
   # Boot time
@@ -45,7 +43,7 @@ system_uptime <- function(round = TRUE, as.vector = FALSE) {
   # Different date types
   date_interval <- lubridate::interval(date_up, date_system)
   date_period <- lubridate::as.period(date_interval)
-  date_hms <- hms::as.hms(seconds)
+  date_hms <- hms::as_hms(seconds)
   
   # Format
   date_system <- format(date_system, usetz = TRUE)
