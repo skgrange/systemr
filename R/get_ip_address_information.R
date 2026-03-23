@@ -17,7 +17,7 @@
 get_ip_address_information <- function(as_list = FALSE) {
   
   # Get current date to nearest second
-  date_system <- lubridate::round_date(lubridate::now())
+  date_system <- threadr::now_to_the_second()
   
   # The url request
   url <- "http://ip-api.com/json/?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query"
