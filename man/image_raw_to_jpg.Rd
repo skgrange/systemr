@@ -2,7 +2,7 @@
 % Please edit documentation in R/image_raw_to_jpg.R
 \name{image_raw_to_jpg}
 \alias{image_raw_to_jpg}
-\title{Function to convert raw image files (usually \code{CR2}) to \code{jpg} image
+\title{Function to convert raw image files (usually \code{cr2}) to \code{jpg} image
 files.}
 \usage{
 image_raw_to_jpg(

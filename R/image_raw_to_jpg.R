@@ -1,4 +1,4 @@
-#' Function to convert raw image files (usually \code{CR2}) to \code{jpg} image
+#' Function to convert raw image files (usually \code{cr2}) to \code{jpg} image
 #' files. 
 #' 
 #' \code{image_raw_to_jpg} requires \code{darktable-cli} to be installed. 
@@ -45,7 +45,7 @@ image_raw_to_jpg <- function(file, file_output = NA, format = "jpg",
   # Check
   if (any(fs::file_exists(file_output))) {
     cli::cli_abort(
-      "Output files exist, this programme will not overwrite these files..."
+      "Output files exist, this programme will not overwrite these files."
     )
   }
   
@@ -67,12 +67,12 @@ image_raw_to_jpg <- function(file, file_output = NA, format = "jpg",
 image_raw_to_jpg_worker <- function(file, file_output, format, verbose) {
   
   # Message to user
-  if (verbose) message(threadr::date_message(), "`", file, "`...")
+  if (verbose) {
+    cli::cli_alert_info("{threadr::cli_date()} `{file}`...")
+  }
   
   # Use darktable to convert the image
-  x <- processx::run(
-    "darktable-cli", args = c(file, file_output), echo_cmd = FALSE, echo = FALSE
-  )
+  x <- processx::run("darktable-cli", args = c(file, file_output))
   
   return(invisible(x))
   
