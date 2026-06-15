@@ -1,7 +1,7 @@
 Package: systemr
 Type: Package
 Title: Tools to Return Structured System Calls
-Version: 0.5.157
+Version: 0.5.158
 Date: 2026-06-15
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"), comment = c(ORCID = "0000-0003-4093-3596"))

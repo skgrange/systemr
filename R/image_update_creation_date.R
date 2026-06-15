@@ -19,6 +19,9 @@ image_update_creation_date <- function(file, date, verbose = FALSE,
   # Check if exiftool is installed
   is_exiftool_installed()
   
+  # Make sure paths are expanded
+  file <- fs::path_expand(file)
+  
   # Check if date is parsed
   stopifnot(lubridate::is.POSIXt(date))
   
