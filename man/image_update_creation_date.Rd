@@ -2,22 +2,24 @@
 % Please edit documentation in R/image_update_creation_date.R
 \name{image_update_creation_date}
 \alias{image_update_creation_date}
-\title{Function to update an image's creation dates.}
+\title{Function to update images' creation dates.}
 \usage{
-image_update_creation_date(file, date, verbose = FALSE)
+image_update_creation_date(file, date, verbose = FALSE, progress = FALSE)
 }
 \arguments{
-\item{file}{File name.}
+\item{file}{Vector of image files.}
 
-\item{date}{Creation date to update \code{file} with.}
+\item{date}{Vector of dates to update \code{file}.}
 
 \item{verbose}{Should the function give messages?}
+
+\item{progress}{Should a progress bar be displayed?}
 }
 \value{
 Invisible \code{file}.
 }
 \description{
-Function to update an image's creation dates.
+Function to update images' creation dates.
 }
 \author{
 Stuart K. Grange.
