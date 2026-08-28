@@ -2,21 +2,24 @@
 % Please edit documentation in R/system_cpu_core_count.R
 \name{system_cpu_core_count}
 \alias{system_cpu_core_count}
-\title{Function to return the system's number of CPU cores.}
+\alias{system_cpu_worker_count}
+\title{Functions to return a system's number of CPU cores.}
 \usage{
 system_cpu_core_count(logical_cores = TRUE, max_cores = NA)
+
+system_cpu_worker_count()
 }
 \arguments{
 \item{logical_cores}{Should logical cores be included in the core count?}
 
 \item{max_cores}{Should the return have a maximum value? This can be useful 
-when there are very many cores and logic is being built.}
+when there are many cores and logic is being built.}
 }
 \value{
 Integer vector with length of 1.
 }
 \description{
-Function to return the system's number of CPU cores.
+Functions to return a system's number of CPU cores.
 }
 \examples{
 
